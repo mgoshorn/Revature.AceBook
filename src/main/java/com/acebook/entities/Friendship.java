@@ -1,5 +1,8 @@
 package com.acebook.entities;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Friendship {
 	
 	private int friend1;
