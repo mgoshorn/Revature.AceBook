@@ -35,10 +35,9 @@ public interface UserDao {
 	/**
 	 * Gets a User object given provided Credentials instance
 	 * @param credentials - User provided authentication details
-	 * @param hash - Hashed salted password
 	 * @return 
 	 */
-	User getUserByCredentials(Credentials credentials, String hash);
+	User getUserByCredentials(Credentials credentials);
 	
 	/**
 	 * Optionally retrieves a User object from database with provided username.
