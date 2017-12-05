@@ -62,12 +62,10 @@ public class UserDaoHibernate implements UserDao {
 	}
 
 	@Override
-	public User getUserByCredentials(Credentials credentials, String hash) {
+	public User getUserByCredentials(Credentials credentials) {
 		Session se = su.getSession();
 		Criteria c = se.createCriteria(User.class);
-		c.add(Restrictions.and(
-				Restrictions.eq("username", credentials.getUsername()),
-				Restrictions.eq("hash", hash)));
+		c.add(Restrictions.eq("username", credentials.getUsername()));
 		User user = (User) c.uniqueResult();
 		return user;
 	}

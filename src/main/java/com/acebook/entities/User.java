@@ -3,7 +3,11 @@ package com.acebook.entities;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 /**
  * Entity representing an Acebook user.
@@ -12,12 +16,13 @@ import javax.persistence.Id;
  *
  */
 @Entity
+@Table(name="users")
 public class User {
 
 	@Id
-	// @SequenceGenerator TODO
-	// @GeneratedValue TODO
-	private int user_id;
+	@SequenceGenerator(name = "users_seq", sequenceName = "users_seq")
+	@GeneratedValue(generator = "users_seq", strategy = GenerationType.AUTO)
+	private int userId;
 	private String username;
 	private String email;
 	private String firstName;
@@ -27,11 +32,12 @@ public class User {
 	private String salt;
 
 	public int getUser_id() {
-		return user_id;
+		return userId;
 	}
+	
 	@Deprecated
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setUserID(int userId) {
+		this.userId = userId;
 	}
 
 	public String getUsername() {
@@ -100,7 +106,7 @@ public class User {
 		result = prime * result + ((hash == null) ? 0 : hash.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((salt == null) ? 0 : salt.hashCode());
-		result = prime * result + user_id;
+		result = prime * result + userId;
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
@@ -144,7 +150,7 @@ public class User {
 				return false;
 		} else if (!salt.equals(other.salt))
 			return false;
-		if (user_id != other.user_id)
+		if (userId != other.userId)
 			return false;
 		if (username == null) {
 			if (other.username != null)
@@ -156,14 +162,14 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [user_id=" + user_id + ", username=" + username + ", email=" + email + ", firstName=" + firstName
+		return "User [userId=" + userId + ", username=" + username + ", email=" + email + ", firstName=" + firstName
 				+ ", lastName=" + lastName + ", birthdate=" + birthdate + ", hash=" + hash + ", salt=" + salt + "]";
 	}
 
-	public User(int user_id, String username, String email, String firstName, String lastName, LocalDate birthdate,
+	public User(int userId, String username, String email, String firstName, String lastName, LocalDate birthdate,
 			String hash, String salt) {
 		super();
-		this.user_id = user_id;
+		this.userId = userId;
 		this.username = username;
 		this.email = email;
 		this.firstName = firstName;
