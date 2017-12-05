@@ -14,7 +14,7 @@ public class UserService {
 
 	private static final Logger log = Logger.getRootLogger();
 	
-	//Later this will be handled by Spring
+	//TODO refactor for injection with Spring
 	private static UserDao dao = new UserDaoHibernate();
 	
 	/**
@@ -22,7 +22,7 @@ public class UserService {
 	 * @param credentials - User provided credentials
 	 * @return Authenticated user instance, or null if authentication fails
 	 */
-	public User authenticate(Credentials credentials) {
+	public final User authenticate(Credentials credentials) {
 		Optional<User> optionalUser = dao.getUserByUsername(credentials.getUsername());
 		
 		//Return null when no user found
@@ -31,7 +31,7 @@ public class UserService {
 		//Access user instance, extract stored hash
 		User user = optionalUser.get();
 		String storedHash = user.getHash();
-		String providedHash = hash(credentials.getPassword(), user.getSalt());
+		String providedHash = this.hash(credentials.getPassword(), user.getSalt());
 		
 		//Check if hashes match
 		if(storedHash.equals(providedHash)) {
@@ -53,6 +53,4 @@ public class UserService {
 	private final String hash(String password, String salt) {
 		return DigestUtils.sha256Hex(password + salt);
 	}
-	
-	
 }
