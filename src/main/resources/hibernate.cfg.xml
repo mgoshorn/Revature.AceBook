@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!-- Configuration of Database -->
+        <property name="hibernate.connection.driver_class">oracle.jdbc.OracleDriver</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
+
+        <property name="hibernate.connection.url">jdbc:oracle:thin:@orcl.ckvdead1mj1q.us-east-2.rds.amazonaws.com:1521:ORCL</property>
+        <property name="hibernate.connection.username">acebook_server</property>
+        <property name="hibernate.connection.password">w1uiQ1CoBkwA0A6gEz8KVgyRc</property>
+        <property name="hibernate.connection.pool_size">35</property>
+        
+        <!-- The property that must not be used -->
+        <!-- <property name="hibernate.hbm2ddl.auto">create</property> -->
+        
+        <!-- Some hibernate configurations -->
+        <property name="show_sql">false</property>
+        <property name="hibernate.format_sql">true</property>
+        
+        <!-- Cache Configuration -->
+        <!--<property name="net.sf.ehcache.configurationResourceName">/ehcache.xml</property>
+        <property name="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</property>
+        <property name="hibernate.cache.use_second_level_cache">true</property>
+        <property name="hibernate.cache.use_query_cache">true</property>-->
+        
+        <!-- Tell Hibernate how we are mapping classes -->
+        <!-- <mapping resource="HoneyPot.hbm.xml"/>  -->
+        
+    </session-factory>
+</hibernate-configuration>
