@@ -60,4 +60,10 @@ public class UserServiceImpl implements UserService{
 	private final String hash(String password, String salt) {
 		return DigestUtils.sha256Hex(password + salt);
 	}
+
+	@Override
+	public User signup(User user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
