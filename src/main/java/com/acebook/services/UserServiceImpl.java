@@ -11,7 +11,7 @@ import com.acebook.beans.Credentials;
 import com.acebook.dao.UserDao;
 import com.acebook.entities.User;
 
-@Service("User Service")
+@Service
 public class UserServiceImpl implements UserService{
 
 	private static final Logger log = Logger.getRootLogger();
