@@ -3,12 +3,14 @@ package com.acebook.dao;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Repository;
+
 import com.acebook.beans.Credentials;
 import com.acebook.entities.User;
 
 /**
  * Interface defines basic behavior of a UserDao implementation
- * @author BlueT
+ * @author Mitchell Goshorn
  *
  */
 public interface UserDao {

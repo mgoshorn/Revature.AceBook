@@ -7,11 +7,13 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Repository;
 
 import com.acebook.beans.Credentials;
 import com.acebook.entities.User;
 import com.acebook.util.SessionUtil;
 
+@Repository
 public class UserDaoHibernate implements UserDao {
 	private SessionUtil su = SessionUtil.getSessionUtil();
 	
