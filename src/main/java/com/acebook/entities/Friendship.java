@@ -1,10 +1,12 @@
 package com.acebook.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 public class Friendship {
-	
+	@Id
+	private int friendshipId;
 	private int friend1;
 	private int friend2;
 	

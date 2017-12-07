@@ -1,13 +1,17 @@
 package com.acebook.services;
 
 import java.util.Optional;
+import java.util.Random;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.log4j.Logger;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.acebook.beans.Credentials;
+import com.acebook.beans.SignUp;
 import com.acebook.dao.UserDao;
 import com.acebook.entities.User;
 
@@ -18,6 +22,7 @@ public class UserServiceImpl implements UserService{
 	
 	@Autowired
 	private UserDao dao;
+
 	
 	/**
 	 * Authenticates a user given provided credentials
@@ -61,9 +66,32 @@ public class UserServiceImpl implements UserService{
 		return DigestUtils.sha256Hex(password + salt);
 	}
 
+	@Transactional
 	@Override
-	public User signup(User user) {
-		// TODO Auto-generated method stub
-		return null;
+	public User signup(SignUp signup) {
+		//TODO meets password standards?
+		//TODO username/email unique?
+		log.trace("Creating new user instance");
+		User user = new User(signup);
+		user.setSalt(generateSalt());
+		user.setHash(hash(signup.getPassword(), user.getSalt()));
+		return dao.save(user);
+	}
+
+	/**
+	 * Generate a new salt String to use with a new account
+	 * Generated String will have alphanumeric capitalized characters.
+	 * @return salt string
+	 */
+	private String generateSalt() {
+		Random rand = new Random(System.nanoTime());
+		String str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+		
+		String salt = "";
+		for(int i = 0; i < 40; i++) {
+			salt += str.charAt(rand.nextInt(str.length()));
+		}
+		
+		return salt;
 	}
 }

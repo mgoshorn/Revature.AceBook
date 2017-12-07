@@ -2,12 +2,15 @@ package com.acebook.entities;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.acebook.beans.SignUp;
 
 /**
  * Entity representing an Acebook user.
@@ -22,12 +25,16 @@ public class User {
 	@Id
 	@SequenceGenerator(name = "users_seq", sequenceName = "users_seq")
 	@GeneratedValue(generator = "users_seq", strategy = GenerationType.AUTO)
+	@Column(name="user_id")
 	private int userId;
 	private String username;
 	private String email;
+	@Column(name="first_name")
 	private String firstName;
+	@Column(name="last_name")
 	private String lastName;
 	private LocalDate birthdate;
+	@Column(name="passhash")
 	private String hash;
 	private String salt;
 
@@ -181,6 +188,14 @@ public class User {
 
 	public User() {
 		// TODO Auto-generated constructor stub
+	}
+
+	public User(SignUp signup) {
+		username = signup.getUsername();
+		birthdate = LocalDate.parse(signup.getBirthday());
+		email = signup.getEmail();
+		firstName = signup.getFirstName();
+		lastName = signup.getLastName();
 	}
 
 }

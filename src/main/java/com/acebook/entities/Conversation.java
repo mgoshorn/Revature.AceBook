@@ -1,10 +1,12 @@
 package com.acebook.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 public class Conversation {
 	
+	@Id
 	private int conversationID;
 	private int user1;
 	private int user2;
