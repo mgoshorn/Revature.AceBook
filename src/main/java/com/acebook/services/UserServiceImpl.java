@@ -2,12 +2,15 @@ package com.acebook.services;
 
 import java.util.Optional;
 
+
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.acebook.beans.Credentials;
+import com.acebook.beans.SignUp;
 import com.acebook.dao.UserDao;
 import com.acebook.entities.User;
 
@@ -61,9 +64,10 @@ public class UserServiceImpl implements UserService{
 		return DigestUtils.sha256Hex(password + salt);
 	}
 
+	@Transactional
 	@Override
-	public User signup(User user) {
-		// TODO Auto-generated method stub
-		return null;
+	public User signup(SignUp signup) {
+		//TODO meets password standards?
+		//TODO username/email unique?
 	}
 }

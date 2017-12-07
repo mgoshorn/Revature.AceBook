@@ -5,8 +5,10 @@ import java.util.Optional;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.acebook.beans.Credentials;
@@ -17,14 +19,12 @@ import com.acebook.util.SessionUtil;
 public class UserDaoHibernate implements UserDao {
 	private SessionUtil su = SessionUtil.getSessionUtil();
 	
+	@Autowired
+	private SessionFactory sf;
+	
 	@Override
 	public User save(User user) {
-		Session se = su.getSession();
-		Transaction tx = se.beginTransaction();
-		se.save(user);
-		tx.commit();
-		se.close();
-		return user;
+		return sf.getCurrentSession().save(user);
 	}
 
 	@Override
