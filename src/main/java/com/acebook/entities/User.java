@@ -2,6 +2,7 @@ package com.acebook.entities;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,12 +25,16 @@ public class User {
 	@Id
 	@SequenceGenerator(name = "users_seq", sequenceName = "users_seq")
 	@GeneratedValue(generator = "users_seq", strategy = GenerationType.AUTO)
+	@Column(name="user_id")
 	private int userId;
 	private String username;
 	private String email;
+	@Column(name="first_name")
 	private String firstName;
+	@Column(name="last_name")
 	private String lastName;
 	private LocalDate birthdate;
+	@Column(name="passhash")
 	private String hash;
 	private String salt;
 

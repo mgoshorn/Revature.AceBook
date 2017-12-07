@@ -3,11 +3,15 @@ package com.acebook.dao;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.acebook.beans.Credentials;
 import com.acebook.entities.User;
@@ -16,14 +20,16 @@ import com.acebook.util.SessionUtil;
 @Repository
 public class UserDaoHibernate implements UserDao {
 	private SessionUtil su = SessionUtil.getSessionUtil();
+	private final Logger log = Logger.getRootLogger();
 	
+	@Autowired
+	private SessionFactory sf;
+	
+	@Transactional
 	@Override
 	public User save(User user) {
-		Session se = su.getSession();
-		Transaction tx = se.beginTransaction();
-		se.save(user);
-		tx.commit();
-		se.close();
+		log.trace("Saving user");
+		sf.getCurrentSession().save(user);		
 		return user;
 	}
 

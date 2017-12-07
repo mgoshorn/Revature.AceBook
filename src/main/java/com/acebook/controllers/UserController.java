@@ -40,6 +40,7 @@ public class UserController {
 	
 	@PutMapping("signup")
 	public ResponseEntity<User> signup(@RequestBody SignUp signup) {
+		log.trace("Signup request received in controller");
 		User user = service.signup(signup);
 		
 		if(user == null) {

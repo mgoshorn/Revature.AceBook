@@ -1,10 +1,12 @@
 package com.acebook.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 public class Wall {
 	
+	@Id
 	private int wallPostID;
 	private int authorID;
 	private String content;

@@ -1,10 +1,13 @@
 package com.acebook.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 public class FriendRequests {
 	
+	@Id
+	private int requestId;
 	private int sender;
 	private int receiver;
 	

@@ -5,6 +5,7 @@ import java.util.Random;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.log4j.Logger;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +22,7 @@ public class UserServiceImpl implements UserService{
 	
 	@Autowired
 	private UserDao dao;
+
 	
 	/**
 	 * Authenticates a user given provided credentials
@@ -69,6 +71,7 @@ public class UserServiceImpl implements UserService{
 	public User signup(SignUp signup) {
 		//TODO meets password standards?
 		//TODO username/email unique?
+		log.trace("Creating new user instance");
 		User user = new User(signup);
 		user.setSalt(generateSalt());
 		user.setHash(hash(signup.getPassword(), user.getSalt()));
