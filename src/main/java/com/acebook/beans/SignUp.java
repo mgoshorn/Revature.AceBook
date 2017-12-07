@@ -5,12 +5,11 @@ public class SignUp {
 	private String firstName;
 	private String lastName;
 	private String email;
-	private String birthdayTimestamp;
+	private String birthday;
 	private String password;
 
 	public SignUp() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public SignUp(String username, String firstName, String lastName, String email, String birthdayTimestamp,
@@ -20,21 +19,21 @@ public class SignUp {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
-		this.birthdayTimestamp = birthdayTimestamp;
+		this.birthday = birthdayTimestamp;
 		this.password = password;
 	}
 
 	@Override
 	public String toString() {
 		return "SignUp [username=" + username + ", firstName=" + firstName + ", lastName=" + lastName + ", email="
-				+ email + ", birthdayTimestamp=" + birthdayTimestamp + ", password=" + password + "]";
+				+ email + ", birthdayTimestamp=" + birthday + ", password=" + password + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((birthdayTimestamp == null) ? 0 : birthdayTimestamp.hashCode());
+		result = prime * result + ((birthday == null) ? 0 : birthday.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
@@ -52,10 +51,10 @@ public class SignUp {
 		if (getClass() != obj.getClass())
 			return false;
 		SignUp other = (SignUp) obj;
-		if (birthdayTimestamp == null) {
-			if (other.birthdayTimestamp != null)
+		if (birthday == null) {
+			if (other.birthday != null)
 				return false;
-		} else if (!birthdayTimestamp.equals(other.birthdayTimestamp))
+		} else if (!birthday.equals(other.birthday))
 			return false;
 		if (email == null) {
 			if (other.email != null)
@@ -117,12 +116,12 @@ public class SignUp {
 		this.email = email;
 	}
 
-	public String getBirthdayTimestamp() {
-		return birthdayTimestamp;
+	public String getBirthday() {
+		return birthday;
 	}
 
-	public void setBirthdayTimestamp(String birthdayTimestamp) {
-		this.birthdayTimestamp = birthdayTimestamp;
+	public void setBirthday(String birthdayTimestamp) {
+		this.birthday = birthdayTimestamp;
 	}
 
 	public String getPassword() {

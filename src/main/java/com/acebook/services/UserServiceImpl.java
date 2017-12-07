@@ -1,7 +1,7 @@
 package com.acebook.services;
 
 import java.util.Optional;
-
+import java.util.Random;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.log4j.Logger;
@@ -69,5 +69,26 @@ public class UserServiceImpl implements UserService{
 	public User signup(SignUp signup) {
 		//TODO meets password standards?
 		//TODO username/email unique?
+		User user = new User(signup);
+		user.setSalt(generateSalt());
+		user.setHash(hash(signup.getPassword(), user.getSalt()));
+		return dao.save(user);
+	}
+
+	/**
+	 * Generate a new salt String to use with a new account
+	 * Generated String will have alphanumeric capitalized characters.
+	 * @return salt string
+	 */
+	private String generateSalt() {
+		Random rand = new Random(System.nanoTime());
+		String str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+		
+		String salt = "";
+		for(int i = 0; i < 40; i++) {
+			salt += str.charAt(rand.nextInt(str.length()));
+		}
+		
+		return salt;
 	}
 }

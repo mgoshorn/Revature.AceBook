@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.acebook.beans.SignUp;
+
 /**
  * Entity representing an Acebook user.
  *  
@@ -181,6 +183,14 @@ public class User {
 
 	public User() {
 		// TODO Auto-generated constructor stub
+	}
+
+	public User(SignUp signup) {
+		username = signup.getUsername();
+		birthdate = LocalDate.parse(signup.getBirthday());
+		email = signup.getEmail();
+		firstName = signup.getFirstName();
+		lastName = signup.getLastName();
 	}
 
 }

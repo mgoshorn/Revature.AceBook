@@ -5,11 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.acebook.beans.Credentials;
+import com.acebook.beans.SignUp;
 import com.acebook.entities.User;
 import com.acebook.services.UserService;
 
@@ -36,7 +38,7 @@ public class UserController {
 		}
 	}
 	
-	@PostMapping("signup")
+	@PutMapping("signup")
 	public ResponseEntity<User> signup(@RequestBody SignUp signup) {
 		User user = service.signup(signup);
 		
