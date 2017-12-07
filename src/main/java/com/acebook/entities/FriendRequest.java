@@ -2,9 +2,12 @@ package com.acebook.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
+
 
 @Entity
-public class FriendRequests {
+@Table(name="FriendRequests")
+public class FriendRequest {
 	
 	@Id
 	private int requestId;
