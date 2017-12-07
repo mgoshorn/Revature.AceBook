@@ -4,22 +4,18 @@ import java.util.List;
 import java.util.Optional;
 
 import org.apache.log4j.Logger;
-import org.hibernate.Criteria;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.acebook.beans.Credentials;
 import com.acebook.entities.User;
-import com.acebook.util.SessionUtil;
 
 @Repository
 public class UserDaoHibernate implements UserDao {
-	private SessionUtil su = SessionUtil.getSessionUtil();
 	private final Logger log = Logger.getRootLogger();
 	
 	@Autowired
@@ -33,83 +29,68 @@ public class UserDaoHibernate implements UserDao {
 		return user;
 	}
 
+	@Transactional
 	@Override
 	public User persist(User user) {
-		Session se = su.getSession();
-		Transaction tx = se.beginTransaction();
-		se.persist(user);
-		tx.commit();
-		se.close();
+		sf.getCurrentSession().persist(user);
 		return user;
 	}
 
+	@Transactional
 	@Override
 	public User get(final int id) {
-		Session se = su.getSession();
-		User user = (User) se.get(User.class, id);
-		se.close();
-		return user;
+		return (User) sf.getCurrentSession().get(User.class, id);
 	}
 	
+	@Transactional(propagation = Propagation.REQUIRED)
 	@Override
 	public User load(final int id) {
-		Session se = su.getSession();
-		User user = (User) se.load(User.class, id);
-		se.close();
-		return user;
+		return (User) sf.getCurrentSession().load(User.class, id);
 	}
 
+	@Transactional
 	@Override
 	public boolean delete(User user) {
-		Session se = su.getSession();
-		Transaction tx = se.beginTransaction();
-		se.delete(user);
-		tx.commit();
-		se.close();
+		sf.getCurrentSession().delete(user);
 		return true;
 	}
 
+	@Transactional
 	@Override
 	public User getUserByCredentials(Credentials credentials) {
-		Session se = su.getSession();
-		Criteria c = se.createCriteria(User.class);
-		c.add(Restrictions.eq("username", credentials.getUsername()));
-		User user = (User) c.uniqueResult();
-		return user;
+		return (User) sf.getCurrentSession()
+				.createCriteria(User.class)
+				.add(Restrictions.eq("username", credentials.getUsername()))
+				.uniqueResult();
 	}
 
+	@Transactional
 	@Override
 	public User update(User user) {
-		Session se = su.getSession();
-		Transaction tx = se.beginTransaction();
-		se.update(user);
-		tx.commit();
-		se.close();
+		sf.getCurrentSession().update(user);
 		return user;
 	}
 
+	@Transactional
 	@Override
 	public User merge(User user) {
-		Session se = su.getSession();
-		Transaction tx = se.beginTransaction();
-		se.merge(user);
-		tx.commit();
-		se.close();
-		return user;
+		return (User) sf.getCurrentSession().merge(user);
 	}
 
+	@Transactional
 	@Override
 	public List<User> getFriends(User user) {
 		// TODO Relies on implementation of friend join table
 		throw new UnsupportedOperationException("Not implemented yet");
 	}
 
+	@Transactional
 	@Override
 	public Optional<User> getUserByUsername(String username) {
-		Session se = su.getSession();
-		Criteria c = se.createCriteria(User.class);
-		c.add(Restrictions.eq("username", username));
-		return Optional.ofNullable((User) c.uniqueResult());
+		return Optional.ofNullable((User) sf.getCurrentSession()
+				.createCriteria(User.class)
+				.add(Restrictions.eqOrIsNull("username", username))
+				.uniqueResult());
 	}
 	
 	
