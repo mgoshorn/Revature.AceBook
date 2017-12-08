@@ -1,8 +1,10 @@
 package com.acebook.dao;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.acebook.entities.FriendRequest;
 import com.acebook.entities.User;
@@ -24,15 +26,31 @@ public class FriendRequestDaoHibernate implements FriendRequestDao {
 		sf.getCurrentSession().delete(request);
 	}
 
+	
 	@Override
-	public boolean isPending(User sender, User receiver) {
-		// TODO Auto-generated method stub
-		return false;
+	@Transactional
+	public boolean isPending(User user, User other) {
+		return null != sf.getCurrentSession().createCriteria(FriendRequest.class)
+				.add(Restrictions.and(
+						Restrictions.eq("sender", user),
+						Restrictions.eq("receiver", other)
+				)).uniqueResult();
 	}
 
+	@Transactional
 	@Override
-	public boolean isReceived(User sender, User receiver) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean isReceived(User user, User other) {
+		return isPending(other, user);
+	}
+
+	@Transactional
+	@Override
+	public FriendRequest getByUsers(User sender, User receiver) {
+		return (FriendRequest) sf.getCurrentSession()
+			.createCriteria(FriendRequest.class)
+			.add(Restrictions.and(
+					Restrictions.eq("sender", sender),
+					Restrictions.eq("receiver", receiver)))
+			.uniqueResult();
 	}
 }

@@ -11,4 +11,6 @@ public interface FriendRequestDao {
 	public boolean isPending(User sender, User receiver);
 
 	public boolean isReceived(User sender, User receiver);
+
+	public FriendRequest getByUsers(User other, User user);
 }
