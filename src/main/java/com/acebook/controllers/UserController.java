@@ -1,14 +1,16 @@
 package com.acebook.controllers;
 
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.HttpStatusCodeException;
 
 import com.acebook.beans.Credentials;
 import com.acebook.beans.SignUp;
@@ -38,10 +40,10 @@ public class UserController {
 		}
 	}
 	
-	@PutMapping("signup")
+	@PostMapping("signup")
 	public ResponseEntity<User> signup(@RequestBody SignUp signup) {
 		log.trace("Signup request received in controller");
-		User user = service.signup(signup);
+		User user = service.signup(signup); 
 		
 		if(user == null) {
 			log.trace("Invalid authentication credentials");
@@ -52,4 +54,10 @@ public class UserController {
 			return ResponseEntity.ok(user);
 		}
 	}
+	
+	@ExceptionHandler(HttpStatusCodeException.class)
+	public ResponseEntity<String> handleexception(HttpStatusCodeException e){
+		return ResponseEntity.status(e.getStatusCode()).body(e.getMessage());
+	}
+	
 }
