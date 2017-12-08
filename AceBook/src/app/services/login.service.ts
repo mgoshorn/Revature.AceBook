@@ -6,8 +6,9 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
-  login(username: String, password: String) {
-    this.http.post()
+  login(credentials) {
+    
   }
+
 
 }
