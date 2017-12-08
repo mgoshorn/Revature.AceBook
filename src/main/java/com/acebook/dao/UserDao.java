@@ -55,4 +55,11 @@ public interface UserDao {
 	 */
 	List<User> getFriends(User user);
 	
+	/**
+	 * Optionally retrieves a User object from database with provided email
+	 * @param email
+	 * @return Optional User
+	 */
+	Optional<User> getUserByEmail(String email);
+	
 }

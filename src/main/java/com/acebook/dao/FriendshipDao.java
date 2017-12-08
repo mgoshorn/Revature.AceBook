@@ -4,14 +4,16 @@ import com.acebook.entities.Friendship;
 
 public interface FriendshipDao {
 	
-	FriendshipDao save(FriendshipDao Friendship);
-	FriendshipDao persist(FriendshipDao Friendship);
+	Friendship save(FriendshipDao Friendship);
+	Friendship persist(FriendshipDao Friendship);
 	
-	FriendshipDao get(int id);
-	FriendshipDao load(int id);
+	Friendship get(int id);
+	Friendship load(int id);
 	
-	FriendshipDao update(FriendshipDao Friendship);
-	FriendshipDao merge(FriendshipDao Friendship);
+	Friendship update(FriendshipDao Friendship);
+	Friendship merge(FriendshipDao Friendship);
 	
 	boolean delete(FriendshipDao Friendship);
+	
+	
 }

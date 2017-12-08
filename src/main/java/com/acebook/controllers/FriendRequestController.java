@@ -4,14 +4,17 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpStatusCodeException;
 
 import com.acebook.beans.Credentials;
-import com.acebook.exceptions.AcebookAPIException;
+import com.acebook.enums.FriendRequestState;
 import com.acebook.services.FriendRequestService;
 
 @RestController
@@ -25,24 +28,41 @@ public class FriendRequestController {
 	
 	
 	@PostMapping("request/{userIdString}")
-	public ResponseEntity request(@PathVariable("userIdString") String userIdString, 
+	public boolean request(@PathVariable("userIdString") String userIdString, 
 						@RequestBody Credentials credentials) {
 		int userId = 0;		
 		
 		try {
 			userId = Integer.parseInt(userIdString);
 			service.addFriendRequest(credentials, userId);
-			
-			
-		} catch(AcebookAPIException e) {
-			log.warn("API Exception thrown with status code: " + e.getStatusCode());
-			return ResponseEntity.status(e.getStatusCode()).body(null);
 		} catch(NumberFormatException e) {
-			log.warn("Number format exception thrown");
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);	
+			throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "URL format exception");	
 		}
-		
-		return ResponseEntity.status(200).body(null);
+		return true;
+	}
+	
+	@PostMapping("friend/{userIdString}")
+	public FriendRequestState getState(@PathVariable("userIdString") int userId,
+			@RequestBody Credentials credentials) {
+		return service.handleFriendRequestState(credentials, userId);
+	}
+	
+	@PostMapping("accept/{userIdString}")
+	public boolean acceptRequest(@PathVariable("userIdString") int userId,
+			@RequestBody Credentials credentials) {
+		return service.handleRequestResponse(credentials, userId, true);
+	}
+	
+	
+	@PostMapping("deny/{userIdString}")
+	public boolean denyRequest(@PathVariable("userIdString") int userId,
+			@RequestBody Credentials credentials) {
+		return service.handleRequestResponse(credentials, userId, false);
+	}
+	
+	@ExceptionHandler(HttpStatusCodeException.class)
+	public ResponseEntity<String> handleException(HttpStatusCodeException e) {
+		return ResponseEntity.status(e.getStatusCode()).body(e.getMessage());
 		
 	}
 	
