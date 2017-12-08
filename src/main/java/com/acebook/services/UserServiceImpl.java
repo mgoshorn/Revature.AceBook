@@ -70,6 +70,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public User signup(SignUp signup) {
 		//TODO meets password standards?
+		
 		//TODO username/email unique?
 		log.trace("Creating new user instance");
 		User user = new User(signup);

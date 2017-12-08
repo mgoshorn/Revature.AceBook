@@ -1,5 +1,9 @@
 package com.acebook.controllers;
 
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,10 +42,27 @@ public class UserController {
 		}
 	}
 	
-	@PutMapping("signup")
+	@PostMapping("signup")
 	public ResponseEntity<User> signup(@RequestBody SignUp signup) {
 		log.trace("Signup request received in controller");
-		User user = service.signup(signup);
+		User user; 
+		
+		//Ensures that the user input a valid birthday, returns a Bad_Request if they did not
+		try {
+			user = service.signup(signup);
+			notNull(signup);
+			//validPassword(user);
+			//validEmail(user);
+			
+		}
+		catch(DateTimeParseException e){
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		}
+		//catch(SQLException e) {
+			//return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		//}
+		
+		
 		
 		if(user == null) {
 			log.trace("Invalid authentication credentials");
@@ -51,5 +72,27 @@ public class UserController {
 			log.trace("Used authenticated.");
 			return ResponseEntity.ok(user);
 		}
+	}
+	
+	private void notNull(SignUp signup) {
+		if(signup.getUsername().equals("") || signup.getFirstName().equals("") 
+		|| signup.getLastName().equals("") || signup.getEmail().equals("") 
+		|| signup.getBirthday().equals("") || signup.getPassword().equals(""))
+		{
+			
+		
+		}
+	}
+
+	public User userValidation(SignUp signup) {
+		User user;
+		try {
+			user = service.signup(signup);
+		}
+		catch(DateTimeParseException e){
+			return null;
+		}
+		
+		return user;
 	}
 }
