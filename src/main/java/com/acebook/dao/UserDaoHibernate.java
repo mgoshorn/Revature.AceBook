@@ -89,7 +89,16 @@ public class UserDaoHibernate implements UserDao {
 	public Optional<User> getUserByUsername(String username) {
 		return Optional.ofNullable((User) sf.getCurrentSession()
 				.createCriteria(User.class)
-				.add(Restrictions.eqOrIsNull("username", username))
+				.add(Restrictions.eq("username", username))
+				.uniqueResult());
+	}
+
+	@Transactional
+	@Override
+	public Optional<User> getUserByEmail(String email) {
+		return Optional.ofNullable((User) sf.getCurrentSession()
+				.createCriteria(User.class)
+				.add(Restrictions.eq("email", email))
 				.uniqueResult());
 	}
 	
