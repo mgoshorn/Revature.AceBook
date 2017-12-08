@@ -3,6 +3,8 @@ package com.acebook.controllers;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,9 +52,9 @@ public class UserController {
 		//Ensures that the user input a valid birthday, returns a Bad_Request if they did not
 		try {
 			user = service.signup(signup);
-			notNull(signup);
-			//validPassword(user);
-			//validEmail(user);
+			user = notNull(signup, user);
+			user = validPassword(signup, user);
+			user = validEmail(signup, user);
 			
 		}
 		catch(DateTimeParseException e){
@@ -74,25 +76,46 @@ public class UserController {
 		}
 	}
 	
-	private void notNull(SignUp signup) {
+	private User notNull(SignUp signup, User user) {
 		if(signup.getUsername().equals("") || signup.getFirstName().equals("") 
 		|| signup.getLastName().equals("") || signup.getEmail().equals("") 
 		|| signup.getBirthday().equals("") || signup.getPassword().equals(""))
 		{
-			
+			return null;
 		
 		}
-	}
-
-	public User userValidation(SignUp signup) {
-		User user;
-		try {
-			user = service.signup(signup);
+		else {
+			return user;
 		}
-		catch(DateTimeParseException e){
+	}
+	
+	private User validPassword(SignUp signup, User user) {
+		String pw = signup.getPassword();
+		Pattern pattern = Pattern.compile("[0-9]", Pattern.CASE_INSENSITIVE);
+		Matcher matcher = pattern.matcher(pw);
+		boolean test = matcher.find();
+		
+		if(test) {
+			return user;
+		}
+		else {
 			return null;
 		}
 		
-		return user;
+	}
+	
+	private User validEmail(SignUp signup, User user) {
+		String email = signup.getEmail();
+		Pattern pattern = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+		Matcher matcher = pattern.matcher(email);
+		boolean test = matcher.matches();
+		
+		if(test) {
+			return user;
+		}
+		else {
+			
+		}
+		return null;
 	}
 }
