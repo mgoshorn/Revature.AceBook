@@ -10,7 +10,9 @@ export class LoginService {
 
   login(credentials) {
     this.body = JSON.stringify(credentials);
-    this.http.post('', this.body);
+    this.http.post('localhost:/Acebook/users/login', this.body).subscribe(res => {
+      console.log(res);
+    });
   }
 
 
