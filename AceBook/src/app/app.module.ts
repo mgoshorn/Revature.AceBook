@@ -9,12 +9,17 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from '../app/components/home/home.component';
 import { UserComponent } from '../app/components/home/user/user.component';
-import { ProfileComponent } from '../app/components/home/profile/profile.component';
+import { ProfileComponent } from '../app/components/profile/profile.component';
 import { FriendComponent } from '../app/components/home/friend/friend.component';
+import { FriendListComponent } from './components/friend/friend-list/friend-list.component';
+import { PostComponent } from './components/post/post.component';
+import { PostListComponent } from './components/post/post-list/post-list.component';
 
 import { LoginService } from '../app/services/login.service';
 
 import { appRoutes } from './app.routes';
+
+
 
 
 
@@ -25,7 +30,10 @@ import { appRoutes } from './app.routes';
     HomeComponent,
     ProfileComponent,
     FriendComponent,
-    UserComponent
+    UserComponent,
+    PostComponent,
+    PostListComponent,
+    FriendListComponent
   ],
   imports: [
     BrowserModule,
