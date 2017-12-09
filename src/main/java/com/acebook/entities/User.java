@@ -1,12 +1,16 @@
 package com.acebook.entities;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -14,34 +18,60 @@ import com.acebook.beans.SignUp;
 
 /**
  * Entity representing an Acebook user.
- *  
+ * 
  * @author Mitchell Goshorn
  *
  */
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class User {
 
 	@Id
 	@SequenceGenerator(name = "users_seq", sequenceName = "users_seq")
 	@GeneratedValue(generator = "users_seq", strategy = GenerationType.AUTO)
-	@Column(name="user_id")
+	@Column(name = "user_id")
 	private int userId;
 	private String username;
 	private String email;
-	@Column(name="first_name")
+	@Column(name = "first_name")
 	private String firstName;
-	@Column(name="last_name")
+	@Column(name = "last_name")
 	private String lastName;
 	private LocalDate birthdate;
-	@Column(name="passhash")
+	@Column(name = "passhash")
 	private String hash;
 	private String salt;
+
+	@ManyToMany
+	@JoinTable(name = "friendship", joinColumns = { @JoinColumn(name = "friend_1") }, inverseJoinColumns = {
+			@JoinColumn(name = "friend_2") })
+	private List<User> friends;
 
 	public int getUser_id() {
 		return userId;
 	}
 	
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public User(int userId, String username, String email, String firstName, String lastName, LocalDate birthdate,
+			String hash, String salt, List<User> friends) {
+		super();
+		this.userId = userId;
+		this.username = username;
+		this.email = email;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.birthdate = birthdate;
+		this.hash = hash;
+		this.salt = salt;
+		this.friends = friends;
+	}
+
+
+
 	@Deprecated
 	public void setUserID(int userId) {
 		this.userId = userId;
@@ -103,6 +133,10 @@ public class User {
 		this.salt = salt;
 	}
 
+	public List<User> getFriends() {
+		return friends;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -110,6 +144,7 @@ public class User {
 		result = prime * result + ((birthdate == null) ? 0 : birthdate.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
+		result = prime * result + ((friends == null) ? 0 : friends.hashCode());
 		result = prime * result + ((hash == null) ? 0 : hash.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((salt == null) ? 0 : salt.hashCode());
@@ -142,6 +177,11 @@ public class User {
 				return false;
 		} else if (!firstName.equals(other.firstName))
 			return false;
+		if (friends == null) {
+			if (other.friends != null)
+				return false;
+		} else if (!friends.equals(other.friends))
+			return false;
 		if (hash == null) {
 			if (other.hash != null)
 				return false;
@@ -170,24 +210,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", username=" + username + ", email=" + email + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", birthdate=" + birthdate + ", hash=" + hash + ", salt=" + salt + "]";
-	}
-
-	public User(int userId, String username, String email, String firstName, String lastName, LocalDate birthdate,
-			String hash, String salt) {
-		super();
-		this.userId = userId;
-		this.username = username;
-		this.email = email;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.birthdate = birthdate;
-		this.hash = hash;
-		this.salt = salt;
-	}
-
-	public User() {
-		// TODO Auto-generated constructor stub
+				+ ", lastName=" + lastName + ", birthdate=" + birthdate + ", hash=" + hash + ", salt=" + salt;
 	}
 
 	public User(SignUp signup) {
