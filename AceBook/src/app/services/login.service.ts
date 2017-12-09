@@ -1,17 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class LoginService {
 
-  body: any;
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   login(credentials) {
-    this.body = JSON.stringify(credentials);
-    this.http.post('localhost:/Acebook/users/login', this.body).subscribe(res => {
-      console.log(res);
+    this.http.post(environment.context + 'users/login', credentials, {withCredentials: true})
+    .subscribe( (success) => {
+      if (success !== '') {
+        this.router.navigateByUrl('home');
+      } else {
+        alert('failed to login');
+      }
     });
   }
 
