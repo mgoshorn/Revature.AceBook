@@ -11,6 +11,7 @@ import { Credentials } from '../../models/credentials';
 export class LoginComponent implements OnInit {
 
   credentials: Credentials;
+  title = 'Acebook';
 
   constructor(private router: Router, private loginService: LoginService) { }
 

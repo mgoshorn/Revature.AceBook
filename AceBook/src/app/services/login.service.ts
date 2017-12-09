@@ -13,9 +13,9 @@ export class LoginService {
     this.http.post(environment.context + 'users/login', credentials, {withCredentials: true})
     .subscribe( (success) => {
       if (success !== '') {
-        this.router.navigateByUrl('home');
+        this.router.navigateByUrl('profile');
       } else {
-        alert('failed to login');
+        console.log('failed to login');
       }
     });
   }
