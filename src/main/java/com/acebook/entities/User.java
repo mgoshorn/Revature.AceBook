@@ -3,6 +3,7 @@ package com.acebook.entities;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -47,6 +49,10 @@ public class User {
 	@JsonIgnore
 	private String salt;
 
+	@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+	@JsonIgnore
+	private List<WallPost> wallPosts;
+	
 	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "friendship", joinColumns = { @JoinColumn(name = "friend_1") }, inverseJoinColumns = {
@@ -139,6 +145,14 @@ public class User {
 		this.salt = salt;
 	}
 
+	public List<WallPost> getWallPosts() {
+		return wallPosts;
+	}
+
+	public void setWallPosts(List<WallPost> wallPosts) {
+		this.wallPosts = wallPosts;
+	}
+	
 	public List<User> getFriends() {
 		return friends;
 	}
@@ -156,6 +170,7 @@ public class User {
 		result = prime * result + ((salt == null) ? 0 : salt.hashCode());
 		result = prime * result + userId;
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		result = prime * result + ((wallPosts == null) ? 0 : wallPosts.hashCode());
 		return result;
 	}
 
@@ -210,14 +225,14 @@ public class User {
 				return false;
 		} else if (!username.equals(other.username))
 			return false;
+		if (wallPosts == null) {
+			if (other.wallPosts != null)
+				return false;
+		} else if (!wallPosts.equals(other.wallPosts))
+			return false;
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", username=" + username + ", email=" + email + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", birthdate=" + birthdate + ", hash=" + hash + ", salt=" + salt;
-	}
 
 	public User(SignUp signup) {
 		username = signup.getUsername();

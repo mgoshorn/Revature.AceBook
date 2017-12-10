@@ -62,6 +62,18 @@ public class UserServiceImpl implements UserService{
 	}
 
 	/**
+	 * Wrapper method for {@link #authenticate(Credentials)} that throws an
+	 * HttpClientErrorException as Unauthorized when authentication fails.
+	 * @param credentials - credentials to authenticate
+	 * @return - User represented by credentials
+	 */
+	public final User mustAuthenticate(Credentials credentials) {
+		User user = authenticate(credentials);
+		if(user == null) throw new HttpClientErrorException(HttpStatus.UNAUTHORIZED, "Username or password is incorrect");
+		return user;
+	}
+	
+	/**
 	 * Helper method for {@link #authenticate(Credentials)}.
 	 * Hashes a password, salt pair using the sha256 algorithm.
 	 * @param password - user provided password
@@ -188,6 +200,22 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
+	public User getUserById(int id) {
+		return dao.get(id);
+	}
+
+	/**
+	 * Gets the User with the given ID or throws exception.
+	 * @param id - ID of requested User
+	 * @return user instance
+	 */
+	@Override
+	public User mustGetUserById(int id) {
+		User user = dao.get(id);
+		if(user == null) throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Null target user");
+		return user;
+	}
+	
 	@Transactional
 	public List<User> getFriends(int userId) {
 		User user = dao.get(userId);
@@ -197,9 +225,6 @@ public class UserServiceImpl implements UserService{
 			Hibernate.initialize(friend);
 		}
 		return friends;
-//		return (List<User>) Hibernate.initialize(user.getFriends());
-//		return (List<User>) ((SessionImplementor) session).getPersistenceContext().unproxy(user.getFriends());	
-		
 	}
 	
 }
