@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 import { environment } from '../../environments/environment';
+import { Credentials } from '../models/credentials';
 
 @Injectable()
 export class LoginService {
@@ -14,9 +15,9 @@ export class LoginService {
     .subscribe( (success) => {
       if (success !== '') {
         this.router.navigateByUrl('profile');
-      } else {
-        console.log('failed to login');
       }
+    }, (error) => {
+      alert('failed to login');
     });
   }
 
