@@ -106,8 +106,7 @@ public class FriendRequestService {
 		
 		if(fr != null) {
 			if(accept) {
-				//add friend
-				//Relies on User class implementation
+				becomeFriends(fr);
 			}
 			dao.delete(fr);
 		} else {
@@ -115,6 +114,13 @@ public class FriendRequestService {
 		}
 		
 		return true;
+	}
+
+	@Transactional
+	private void becomeFriends(FriendRequest fr) {
+		fr.getSender().getFriends().add(fr.getReceiver());
+		fr.getReceiver().getFriends().add(fr.getSender());
+		
 	}
 
 

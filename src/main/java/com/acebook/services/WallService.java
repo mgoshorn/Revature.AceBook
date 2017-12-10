@@ -27,7 +27,8 @@ public class WallService {
 	}
 	
 	public boolean hasPermission(User owner, User poster) {
-		
+		if(owner.equals(poster)) return true;
+		if()
 	}
 	
 }

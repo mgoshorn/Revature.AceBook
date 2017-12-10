@@ -1,6 +1,7 @@
 package com.acebook.services;
 
 import java.time.format.DateTimeParseException;
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 import java.util.regex.Matcher;
@@ -8,6 +9,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.log4j.Logger;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -212,6 +214,17 @@ public class UserServiceImpl implements UserService{
 		User user = dao.get(id);
 		if(user == null) throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Null target user");
 		return user;
+	}
+	
+	@Transactional
+	public List<User> getFriends(int userId) {
+		User user = dao.get(userId);
+		if(user == null) throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Null user requested");
+		List<User> friends = user.getFriends();
+		for(User friend : friends) {
+			Hibernate.initialize(friend);
+		}
+		return friends;
 	}
 	
 }

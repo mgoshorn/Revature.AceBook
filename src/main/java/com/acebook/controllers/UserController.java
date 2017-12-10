@@ -1,11 +1,16 @@
 package com.acebook.controllers;
 
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +32,7 @@ public class UserController {
 	private static final Logger log = Logger.getRootLogger();
 	
 	@PostMapping("login")
+	@CrossOrigin(allowCredentials = "true", origins = "http://localhost:4200")
 	public ResponseEntity<User> login(@RequestBody Credentials credentials) {
 		User user = service.authenticate(credentials);
 		
@@ -41,6 +47,7 @@ public class UserController {
 	}
 	
 	@PostMapping("signup")
+	@CrossOrigin(allowCredentials = "true", origins = "http://localhost:4200")
 	public ResponseEntity<User> signup(@RequestBody SignUp signup) {
 		log.trace("Signup request received in controller");
 		User user = service.signup(signup); 
@@ -58,6 +65,12 @@ public class UserController {
 	@ExceptionHandler(HttpStatusCodeException.class)
 	public ResponseEntity<String> handleexception(HttpStatusCodeException e){
 		return ResponseEntity.status(e.getStatusCode()).body(e.getMessage());
+	}
+	
+	@GetMapping("friends/{userId}")
+	@CrossOrigin(allowCredentials = "true", origins = "http://localhost:4200")
+	public List<User> getFriends(@PathVariable("userId") int userId) {
+		return service.getFriends(userId);
 	}
 	
 }
