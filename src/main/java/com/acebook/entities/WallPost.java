@@ -28,6 +28,7 @@ public class WallPost implements Comparable<WallPost> {
 	private String body;
 	@Column(name="POST_TIMESTAMP")
 	private LocalDateTime postTime;
+	private int privacy = 1;
 
 	public WallPost(User wallOwner, User poster, String postbody) {
 		this.owner = wallOwner;
@@ -140,6 +141,15 @@ public class WallPost implements Comparable<WallPost> {
 	public void setPostTime(LocalDateTime postTime) {
 		this.postTime = postTime;
 	}
+	
+	public int getPrivacy() {
+		return privacy;
+	}
+	
+	public void setPrivacy(int privacy) {
+		this.privacy = privacy;
+	}
+	
 
 	@Override
 	public int compareTo(WallPost wp) {
