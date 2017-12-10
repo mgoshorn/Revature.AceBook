@@ -3,11 +3,10 @@ package com.acebook.entities;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,11 +17,11 @@ public class WallPost implements Comparable<WallPost> {
 	@Column(name="wall_post_id")
 	private int wallPostId;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "owner_id")
 	private User owner;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "author_id")
 	private User poster;
 	@Column(name="content")

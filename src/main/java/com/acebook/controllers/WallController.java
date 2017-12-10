@@ -25,18 +25,16 @@ public class WallController {
 	WallService ws;
 	
 	@PostMapping("post/{userId}")
-	public WallPost requestWallPost(@PathVariable("userId") int userId,
+	public WallPost handlePostToWall(@PathVariable("userId") int userId,
 						@RequestBody PostRequest postRequest) {
 		
-		ws.wallPost(userId, postRequest);
-		return null;
+		return ws.wallPost(userId, postRequest);
 	}
 	
 	@PostMapping("read/{userId}")
 	public List<WallPost> handleGetWallPosts(@PathVariable("userId") int userId,
 						@RequestBody Credentials credentials) {
 		return ws.getWallPosts(userId, credentials);
-		
 	}
 	
 	@ExceptionHandler(HttpStatusCodeException.class)

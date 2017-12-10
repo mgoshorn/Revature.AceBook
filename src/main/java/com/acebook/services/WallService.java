@@ -25,7 +25,7 @@ public class WallService {
 	UserDao userDao;
 	
 	@Transactional
-	public void wallPost(int targetUserId, PostRequest postRequest) {
+	public WallPost wallPost(int targetUserId, PostRequest postRequest) {
 		User poster = us.mustAuthenticate(postRequest.getCredentials());
 		User wallOwner = us.mustGetUserById(targetUserId);
 		
@@ -35,6 +35,7 @@ public class WallService {
 		
 		WallPost wp = new WallPost(wallOwner, poster, postRequest.getPostbody());
 		wallOwner.getWallPosts().add(wp);
+		return wp;
 	}
 	
 	@Transactional

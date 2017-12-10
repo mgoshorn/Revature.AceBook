@@ -48,7 +48,7 @@ public class User {
 	@JsonIgnore
 	private String salt;
 
-	@OneToMany
+	@OneToMany(mappedBy = "owner")
 	@JsonIgnore
 	private List<WallPost> wallPosts;
 	
