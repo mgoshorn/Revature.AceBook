@@ -15,6 +15,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.acebook.beans.SignUp;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Entity representing an Acebook user.
@@ -32,16 +33,21 @@ public class User {
 	@Column(name = "user_id")
 	private int userId;
 	private String username;
+	
+	@JsonIgnore
 	private String email;
 	@Column(name = "first_name")
 	private String firstName;
 	@Column(name = "last_name")
 	private String lastName;
 	private LocalDate birthdate;
+	@JsonIgnore
 	@Column(name = "passhash")
 	private String hash;
+	@JsonIgnore
 	private String salt;
 
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "friendship", joinColumns = { @JoinColumn(name = "friend_1") }, inverseJoinColumns = {
 			@JoinColumn(name = "friend_2") })
