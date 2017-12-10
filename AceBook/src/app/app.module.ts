@@ -15,11 +15,14 @@ import { FriendComponent } from '../app/components/home/friend/friend.component'
 import { FriendListComponent } from './components/friend/friend-list/friend-list.component';
 import { PostComponent } from './components/post/post.component';
 import { PostListComponent } from './components/post/post-list/post-list.component';
+import { SignupComponent } from './components/signup/signup.component';
 
 import { LoginService } from '../app/services/login.service';
+import { SignupService } from './services/signup.service';
 
 import { appRoutes } from './app.routes';
-import { SignupComponent } from './components/signup/signup.component';
+
+
 
 
 
@@ -45,7 +48,7 @@ import { SignupComponent } from './components/signup/signup.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [LoginService],
+  providers: [LoginService, SignupService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

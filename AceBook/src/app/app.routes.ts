@@ -5,12 +5,17 @@ import { UserComponent } from '../app/components/home/user/user.component';
 import { ProfileComponent } from '../app/components/profile/profile.component';
 import { FriendComponent } from '../app/components/home/friend/friend.component';
 import { Profile } from 'selenium-webdriver/firefox';
+import { SignupComponent } from './components/signup/signup.component';
 
 export const appRoutes: Routes = [
     {
       path: 'login',
       component: LoginComponent,
       pathMatch: 'full'
+    },
+    {
+      path: 'signup',
+      component: SignupComponent
     },
     {
       path: 'profile',
