@@ -49,7 +49,9 @@ public class User {
 	private String salt;
 
 	@OneToMany
+	@JsonIgnore
 	private List<WallPost> wallPosts;
+	
 	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "friendship", joinColumns = { @JoinColumn(name = "friend_1") }, inverseJoinColumns = {

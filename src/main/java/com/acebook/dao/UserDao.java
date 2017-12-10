@@ -3,10 +3,9 @@ package com.acebook.dao;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.stereotype.Repository;
-
 import com.acebook.beans.Credentials;
 import com.acebook.entities.User;
+import com.acebook.entities.WallPost;
 
 /**
  * Interface defines basic behavior of a UserDao implementation
@@ -61,5 +60,7 @@ public interface UserDao {
 	 * @return Optional User
 	 */
 	Optional<User> getUserByEmail(String email);
+	
+	List<WallPost> getWallPosts(User user);
 	
 }

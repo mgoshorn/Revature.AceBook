@@ -2,14 +2,32 @@ package com.acebook.entities;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.Embeddable;
+import javax.persistence.Column;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
-@Embeddable
+@Entity
+@Table(name="Wall_Post")
 public class WallPost implements Comparable<WallPost> {
+	
+	@Id
+	@Column(name="wall_post_id")
 	private int wallPostId;
+	
+	@OneToOne
+	@JoinColumn(name = "owner_id")
 	private User owner;
+	
+	@OneToOne
+	@JoinColumn(name = "author_id")
 	private User poster;
+	@Column(name="content")
 	private String body;
+	@Column(name="POST_TIMESTAMP")
 	private LocalDateTime postTime;
 
 	public WallPost(User wallOwner, User poster, String postbody) {
