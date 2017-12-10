@@ -133,3 +133,13 @@ body, html {
 .forgot-password:focus{
     color: rgb(12, 97, 33);
 }
+
+.signup {
+    color: rgb(104, 145, 162);
+}
+
+.signup:hover,
+.signup:active,
+.signup:focus{
+    color: rgb(12, 97, 33);
+}

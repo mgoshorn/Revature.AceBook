@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
 
 
@@ -18,6 +19,7 @@ import { PostListComponent } from './components/post/post-list/post-list.compone
 import { LoginService } from '../app/services/login.service';
 
 import { appRoutes } from './app.routes';
+import { SignupComponent } from './components/signup/signup.component';
 
 
 
@@ -33,12 +35,14 @@ import { appRoutes } from './app.routes';
     UserComponent,
     PostComponent,
     PostListComponent,
-    FriendListComponent
+    FriendListComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes, { useHash: true }),
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule
   ],
   providers: [LoginService],
