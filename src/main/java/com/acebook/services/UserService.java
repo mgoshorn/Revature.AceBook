@@ -8,6 +8,11 @@ public interface UserService {
 
 	public User authenticate(Credentials credentials);
 	
+	public User mustAuthenticate(Credentials credentials);
+	
 	public User signup(SignUp signup);
+	
+	public User getUserById(int id);
+	public User mustGetUserById(int id);
 }
 	

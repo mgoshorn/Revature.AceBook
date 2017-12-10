@@ -1,5 +1,7 @@
 package com.acebook.entities;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -7,36 +9,10 @@ import javax.persistence.Id;
 public class Wall {
 	
 	@Id
-	private int wallPostID;
-	private int authorID;
+	private int wallId;
+	private User owner;
 	private String content;
 	private int privacy;
 	
-	public int getWallPostID() {
-		return wallPostID;
+	private List<WallPost> posts;
 	}
-	public void setWallPostID(int wallPostID) {
-		this.wallPostID = wallPostID;
-	}
-	public int getAuthorID() {
-		return authorID;
-	}
-	public void setAuthorID(int authorID) {
-		this.authorID = authorID;
-	}
-	public String getContent() {
-		return content;
-	}
-	public void setContent(String content) {
-		this.content = content;
-	}
-	public int getPrivacy() {
-		return privacy;
-	}
-	public void setPrivacy(int privacy) {
-		this.privacy = privacy;
-	}
-	
-	
-	
-}

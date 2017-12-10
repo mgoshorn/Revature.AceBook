@@ -8,7 +8,6 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.log4j.Logger;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -60,6 +59,18 @@ public class UserServiceImpl implements UserService{
 		}
 	}
 
+	/**
+	 * Wrapper method for {@link #authenticate(Credentials)} that throws an
+	 * HttpClientErrorException as Unauthorized when authentication fails.
+	 * @param credentials - credentials to authenticate
+	 * @return - User represented by credentials
+	 */
+	public final User mustAuthenticate(Credentials credentials) {
+		User user = authenticate(credentials);
+		if(user == null) throw new HttpClientErrorException(HttpStatus.UNAUTHORIZED, "Username or password is incorrect");
+		return user;
+	}
+	
 	/**
 	 * Helper method for {@link #authenticate(Credentials)}.
 	 * Hashes a password, salt pair using the sha256 algorithm.
@@ -184,6 +195,23 @@ public class UserServiceImpl implements UserService{
 			throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Email already in use");
 		}
 		
+	}
+
+	@Override
+	public User getUserById(int id) {
+		return dao.get(id);
+	}
+
+	/**
+	 * Gets the User with the given ID or throws exception.
+	 * @param id - ID of requested User
+	 * @return user instance
+	 */
+	@Override
+	public User mustGetUserById(int id) {
+		User user = dao.get(id);
+		if(user == null) throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Null target user");
+		return user;
 	}
 	
 }

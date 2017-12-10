@@ -1,12 +1,14 @@
 package com.acebook.entities;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -14,34 +16,37 @@ import com.acebook.beans.SignUp;
 
 /**
  * Entity representing an Acebook user.
- *  
+ * 
  * @author Mitchell Goshorn
  *
  */
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class User {
 
 	@Id
 	@SequenceGenerator(name = "users_seq", sequenceName = "users_seq")
 	@GeneratedValue(generator = "users_seq", strategy = GenerationType.AUTO)
-	@Column(name="user_id")
+	@Column(name = "user_id")
 	private int userId;
 	private String username;
 	private String email;
-	@Column(name="first_name")
+	@Column(name = "first_name")
 	private String firstName;
-	@Column(name="last_name")
+	@Column(name = "last_name")
 	private String lastName;
 	private LocalDate birthdate;
-	@Column(name="passhash")
+	@Column(name = "passhash")
 	private String hash;
 	private String salt;
+
+	@OneToMany
+	private List<WallPost> wallPosts;
 
 	public int getUser_id() {
 		return userId;
 	}
-	
+
 	@Deprecated
 	public void setUserID(int userId) {
 		this.userId = userId;
@@ -103,6 +108,14 @@ public class User {
 		this.salt = salt;
 	}
 
+	public List<WallPost> getWallPosts() {
+		return wallPosts;
+	}
+
+	public void setWallPosts(List<WallPost> wallPosts) {
+		this.wallPosts = wallPosts;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -115,6 +128,7 @@ public class User {
 		result = prime * result + ((salt == null) ? 0 : salt.hashCode());
 		result = prime * result + userId;
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		result = prime * result + ((wallPosts == null) ? 0 : wallPosts.hashCode());
 		return result;
 	}
 
@@ -164,26 +178,19 @@ public class User {
 				return false;
 		} else if (!username.equals(other.username))
 			return false;
+		if (wallPosts == null) {
+			if (other.wallPosts != null)
+				return false;
+		} else if (!wallPosts.equals(other.wallPosts))
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", username=" + username + ", email=" + email + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", birthdate=" + birthdate + ", hash=" + hash + ", salt=" + salt + "]";
-	}
-
-	public User(int userId, String username, String email, String firstName, String lastName, LocalDate birthdate,
-			String hash, String salt) {
-		super();
-		this.userId = userId;
-		this.username = username;
-		this.email = email;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.birthdate = birthdate;
-		this.hash = hash;
-		this.salt = salt;
+				+ ", lastName=" + lastName + ", birthdate=" + birthdate + ", hash=" + hash + ", salt=" + salt
+				+ ", wallPosts=" + wallPosts + "]";
 	}
 
 	public User() {
