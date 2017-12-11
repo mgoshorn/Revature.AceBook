@@ -1,16 +1,21 @@
 package com.acebook.controllers;
 
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpStatusCodeException;
 
 import com.acebook.beans.Credentials;
@@ -46,12 +51,12 @@ public class UserController {
 	@CrossOrigin(allowCredentials = "true", origins = "http://localhost:4200")
 	public ResponseEntity<User> signup(@RequestBody SignUp signup) {
 		log.trace("Signup request received in controller");
+		log.trace(signup);
 		User user = service.signup(signup); 
 		
 		if(user == null) {
 			log.trace("Invalid authentication credentials");
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
-			//TODO throw new InvalidCredentialsException()
+			throw new HttpClientErrorException(HttpStatus.UNAUTHORIZED, "You must be logged in to do this.");
 		} else {
 			log.trace("Used authenticated.");
 			return ResponseEntity.ok(user);
@@ -62,5 +67,12 @@ public class UserController {
 	public ResponseEntity<String> handleexception(HttpStatusCodeException e){
 		return ResponseEntity.status(e.getStatusCode()).body(e.getMessage());
 	}
+	
+	@GetMapping("friends/{userId}")
+	@CrossOrigin(allowCredentials = "true", origins = "http://localhost:4200")
+	public List<User> getFriends(@PathVariable("userId") int userId) {
+		return service.getFriends(userId);
+	}
+	
 	
 }

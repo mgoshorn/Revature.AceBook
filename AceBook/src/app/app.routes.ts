@@ -10,7 +10,8 @@ import { SignupComponent } from './components/signup/signup.component';
 export const appRoutes: Routes = [
     {
       path: 'login',
-      component: LoginComponent
+      component: LoginComponent,
+      pathMatch: 'full'
     },
     {
       path: 'signup',
@@ -19,18 +20,22 @@ export const appRoutes: Routes = [
     {
       path: 'profile',
       component: ProfileComponent,
+      pathMatch: 'full',
       children: [
         {
           path: 'user',
-          component: UserComponent
+          component: UserComponent,
+          pathMatch: 'full',
         },
         {
             path: 'profile',
-            component: ProfileComponent
+            component: ProfileComponent,
+            pathMatch: 'full',
         },
         {
             path: 'friend',
-            component: FriendComponent
+            component: FriendComponent,
+            pathMatch: 'full',
         }
       ]
     },

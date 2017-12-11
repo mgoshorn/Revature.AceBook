@@ -1,39 +1,44 @@
 package com.acebook.beans;
 
+import java.time.LocalDate;
+
+
 public class SignUp {
 	private String username;
 	private String firstName;
 	private String lastName;
 	private String email;
-	private String birthday;
+	private LocalDate birthdate;
 	private String password;
 
 	public SignUp() {
 		super();
 	}
 
-	public SignUp(String username, String firstName, String lastName, String email, String birthdayTimestamp,
+	public SignUp(String username, String firstName, String lastName, String email, LocalDate birthdate,
 			String password) {
 		super();
 		this.username = username;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
-		this.birthday = birthdayTimestamp;
+		this.birthdate = birthdate;
 		this.password = password;
 	}
+
+	
 
 	@Override
 	public String toString() {
 		return "SignUp [username=" + username + ", firstName=" + firstName + ", lastName=" + lastName + ", email="
-				+ email + ", birthdayTimestamp=" + birthday + ", password=" + password + "]";
+				+ email + ", birthdate=" + birthdate + ", password=" + password + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((birthday == null) ? 0 : birthday.hashCode());
+		result = prime * result + ((birthdate == null) ? 0 : birthdate.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
@@ -51,10 +56,10 @@ public class SignUp {
 		if (getClass() != obj.getClass())
 			return false;
 		SignUp other = (SignUp) obj;
-		if (birthday == null) {
-			if (other.birthday != null)
+		if (birthdate == null) {
+			if (other.birthdate != null)
 				return false;
-		} else if (!birthday.equals(other.birthday))
+		} else if (!birthdate.equals(other.birthdate))
 			return false;
 		if (email == null) {
 			if (other.email != null)
@@ -116,12 +121,12 @@ public class SignUp {
 		this.email = email;
 	}
 
-	public String getBirthday() {
-		return birthday;
+	public LocalDate getBirthdate() {
+		return birthdate;
 	}
 
-	public void setBirthday(String birthdayTimestamp) {
-		this.birthday = birthdayTimestamp;
+	public void setBirthdate(LocalDate birthdate) {
+		this.birthdate = birthdate;
 	}
 
 	public String getPassword() {

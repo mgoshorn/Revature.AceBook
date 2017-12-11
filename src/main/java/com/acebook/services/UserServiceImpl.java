@@ -1,6 +1,7 @@
 package com.acebook.services;
 
 import java.time.format.DateTimeParseException;
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 import java.util.regex.Matcher;
@@ -8,7 +9,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.log4j.Logger;
-import org.hibernate.SessionFactory;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -61,6 +62,18 @@ public class UserServiceImpl implements UserService{
 	}
 
 	/**
+	 * Wrapper method for {@link #authenticate(Credentials)} that throws an
+	 * HttpClientErrorException as Unauthorized when authentication fails.
+	 * @param credentials - credentials to authenticate
+	 * @return - User represented by credentials
+	 */
+	public final User mustAuthenticate(Credentials credentials) {
+		User user = authenticate(credentials);
+		if(user == null) throw new HttpClientErrorException(HttpStatus.UNAUTHORIZED, "Username or password is incorrect");
+		return user;
+	}
+	
+	/**
 	 * Helper method for {@link #authenticate(Credentials)}.
 	 * Hashes a password, salt pair using the sha256 algorithm.
 	 * @param password - user provided password
@@ -74,29 +87,33 @@ public class UserServiceImpl implements UserService{
 	@Transactional
 	@Override
 	public User signup(SignUp signup) {
-		User user;
-		log.trace("Creating new user instance");
-		//Checks that the user input a valid date, throws exception if otherwise
+		log.trace("In service signup...");
+
 		try {
-			user = new User(signup);
+			log.trace("Creating new user instance");
+			//Checks that the user input a valid date, throws exception if otherwise
+			log.debug(signup);
+			User user = new User(signup);
+			
+			//Non-null values
+			notNull(signup);
+			//Passwords meets specifications
+			validPassword(signup);
+			//Email meets specifications
+			validEmail(signup);
+			//Username is unique
+			uniqueUsername(signup.getUsername());
+			//Email is unique
+			uniqueEmail(signup.getEmail());
+			
+			user.setSalt(generateSalt());
+			user.setHash(hash(signup.getPassword(), user.getSalt()));
+			return dao.save(user);
 		}
 		catch(DateTimeParseException e) {
 			throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Invalid Date");
 		}
-		//Non-null values
-		notNull(signup);
-		//Passwords meets specifications
-		validPassword(signup);
-		//Email meets specifications
-		validEmail(signup);
-		//Username is unique
-		uniqueUsername(signup.getUsername());
-		//Email is unique
-		uniqueEmail(signup.getEmail());
 		
-		user.setSalt(generateSalt());
-		user.setHash(hash(signup.getPassword(), user.getSalt()));
-		return dao.save(user);
 	}
 
 	/**
@@ -105,6 +122,7 @@ public class UserServiceImpl implements UserService{
 	 * @return salt string
 	 */
 	private String generateSalt() {
+		log.trace("Generating salt..");
 		Random rand = new Random(System.nanoTime());
 		String str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 		
@@ -120,9 +138,10 @@ public class UserServiceImpl implements UserService{
 	 * @param signup
 	 */
 	private void notNull(SignUp signup) {
+		log.trace("Validating data present...");
 		if(signup.getUsername().equals("") || signup.getFirstName().equals("") 
 		|| signup.getLastName().equals("") || signup.getEmail().equals("") 
-		|| signup.getBirthday().equals("") || signup.getPassword().equals(""))
+		|| signup.getBirthdate().equals("") || signup.getPassword().equals(""))
 		{
 			throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Cannot leave required fields blank");
 		}
@@ -134,6 +153,7 @@ public class UserServiceImpl implements UserService{
 	 */
 	private void validPassword(SignUp signup) {
 		//Number Requirement
+		log.trace("Validating password...");
 		String pw = signup.getPassword();
 		Pattern pattern = Pattern.compile("[0-9]", Pattern.CASE_INSENSITIVE);
 		Matcher matcher = pattern.matcher(pw);
@@ -154,6 +174,7 @@ public class UserServiceImpl implements UserService{
 	 * @param signup
 	 */
 	private void validEmail(SignUp signup) {
+		log.trace("Validating email...");
 		String email = signup.getEmail();
 		Pattern pattern = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 		Matcher matcher = pattern.matcher(email);
@@ -170,6 +191,7 @@ public class UserServiceImpl implements UserService{
 	 * @param username
 	 */
 	public void uniqueUsername(String username) {
+		log.trace("Validating username uniqueness...");
 		if ((dao.getUserByUsername(username).isPresent())) {
 			throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Username already exists");
 		}
@@ -180,10 +202,39 @@ public class UserServiceImpl implements UserService{
 	 * @param email
 	 */
 	private void uniqueEmail(String email) {
+		log.trace("Validating email uniqueness");
 		if ((dao.getUserByEmail(email).isPresent())) {
 			throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Email already in use");
 		}
 		
+	}
+
+	@Override
+	public User getUserById(int id) {
+		return dao.get(id);
+	}
+
+	/**
+	 * Gets the User with the given ID or throws exception.
+	 * @param id - ID of requested User
+	 * @return user instance
+	 */
+	@Override
+	public User mustGetUserById(int id) {
+		User user = dao.get(id);
+		if(user == null) throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Null target user");
+		return user;
+	}
+	
+	@Transactional
+	public List<User> getFriends(int userId) {
+		User user = dao.get(userId);
+		if(user == null) throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Null user requested");
+		List<User> friends = user.getFriends();
+		for(User friend : friends) {
+			Hibernate.initialize(friend);
+		}
+		return friends;
 	}
 	
 }

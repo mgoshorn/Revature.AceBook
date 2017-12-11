@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.acebook.beans.Credentials;
 import com.acebook.entities.User;
+import com.acebook.entities.WallPost;
 
 @Repository
 public class UserDaoHibernate implements UserDao {
@@ -100,6 +102,14 @@ public class UserDaoHibernate implements UserDao {
 				.createCriteria(User.class)
 				.add(Restrictions.eq("email", email))
 				.uniqueResult());
+	}
+
+	@Transactional
+	@Override
+	public List<WallPost> getWallPosts(User user) {
+		return (List<WallPost>) sf.getCurrentSession().createCriteria(WallPost.class)
+			.add(Restrictions.eq("owner", user))
+			.addOrder(Order.desc("postTime")).list();
 	}
 	
 	
