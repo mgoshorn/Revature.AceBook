@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,6 +28,7 @@ public class UserController {
 	private static final Logger log = Logger.getRootLogger();
 	
 	@PostMapping("login")
+	@CrossOrigin(allowCredentials = "true", origins = "http://localhost:4200")
 	public ResponseEntity<User> login(@RequestBody Credentials credentials) {
 		User user = service.authenticate(credentials);
 		
@@ -41,6 +43,7 @@ public class UserController {
 	}
 	
 	@PostMapping("signup")
+	@CrossOrigin(allowCredentials = "true", origins = "http://localhost:4200")
 	public ResponseEntity<User> signup(@RequestBody SignUp signup) {
 		log.trace("Signup request received in controller");
 		User user = service.signup(signup); 
