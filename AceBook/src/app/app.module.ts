@@ -16,6 +16,8 @@ import { FriendListComponent } from './components/friend/friend-list/friend-list
 import { PostComponent } from './components/post/post.component';
 import { PostListComponent } from './components/post/post-list/post-list.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { ProfileWallComponent } from './profile-wall/profile-wall.component';
+import { WallNewPostComponent } from './wall-new-post/wall-new-post.component';
 
 import { LoginService } from '../app/services/login.service';
 import { SignupService } from './services/signup.service';
@@ -39,7 +41,9 @@ import { appRoutes } from './app.routes';
     PostComponent,
     PostListComponent,
     FriendListComponent,
-    SignupComponent
+    SignupComponent,
+    ProfileWallComponent,
+    WallNewPostComponent
   ],
   imports: [
     BrowserModule,

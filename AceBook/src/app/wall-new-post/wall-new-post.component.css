@@ -1,0 +1,24 @@
+#container {
+    margin: 1vmin;
+    padding: 1vmin;
+    box-sizing: border-box;
+    position: relative;
+    background: #e7e7e7;
+    border-radius: 0.5vmin;
+}
+#container > *:not(:first-child) {
+    margin-top: 1vmin;
+}
+
+#new-wall-post-input {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 120px;
+    padding: 1vmin;
+}
+
+#new-wall-post-button {
+    display: block;
+    margin-left: auto;
+}
