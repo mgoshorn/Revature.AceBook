@@ -1,18 +1,21 @@
 package com.acebook.beans;
 
+import java.time.LocalDate;
+
+
 public class SignUp {
 	private String username;
 	private String firstName;
 	private String lastName;
 	private String email;
-	private String birthdate;
+	private LocalDate birthdate;
 	private String password;
 
 	public SignUp() {
 		super();
 	}
 
-	public SignUp(String username, String firstName, String lastName, String email, String birthdate,
+	public SignUp(String username, String firstName, String lastName, String email, LocalDate birthdate,
 			String password) {
 		super();
 		this.username = username;
@@ -118,11 +121,11 @@ public class SignUp {
 		this.email = email;
 	}
 
-	public String getBirthdate() {
+	public LocalDate getBirthdate() {
 		return birthdate;
 	}
 
-	public void setBirthdate(String birthdate) {
+	public void setBirthdate(LocalDate birthdate) {
 		this.birthdate = birthdate;
 	}
 

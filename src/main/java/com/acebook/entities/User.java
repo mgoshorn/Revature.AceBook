@@ -236,7 +236,7 @@ public class User {
 
 	public User(SignUp signup) {
 		username = signup.getUsername();
-		birthdate = LocalDate.parse(signup.getBirthdate());
+		birthdate = signup.getBirthdate();
 		email = signup.getEmail();
 		firstName = signup.getFirstName();
 		lastName = signup.getLastName();
