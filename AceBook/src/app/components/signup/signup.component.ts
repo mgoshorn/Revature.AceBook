@@ -20,6 +20,7 @@ export class SignupComponent implements OnInit {
 
   onSubmit() {
     console.log(this.signup);
+    console.log(this.signup.birthday);
     this.signupService.signup(this.signup);
   }
 
