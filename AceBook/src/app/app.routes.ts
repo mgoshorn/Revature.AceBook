@@ -31,11 +31,6 @@ export const appRoutes: Routes = [
             path: 'profile',
             component: ProfileComponent,
             pathMatch: 'full',
-        },
-        {
-            path: 'friend',
-            component: FriendComponent,
-            pathMatch: 'full',
         }
       ]
     },
