@@ -12,7 +12,8 @@ import { HomeComponent } from '../app/components/home/home.component';
 import { UserComponent } from '../app/components/home/user/user.component';
 import { ProfileComponent } from '../app/components/profile/profile.component';
 import { FriendComponent } from '../app/components/home/friend/friend.component';
-import { FriendListComponent } from './components/friend/friend-list/friend-list.component';
+import { FriendRequestComponent } from './components/friend/friend-request/friend-request.component';
+
 import { PostComponent } from './components/post/post.component';
 import { PostListComponent } from './components/post/post-list/post-list.component';
 import { SignupComponent } from './components/signup/signup.component';
@@ -22,17 +23,13 @@ import { WallPostsComponent } from './components/wall-posts/wall-posts.component
 
 import { LoginService } from '../app/services/login.service';
 import { SignupService } from './services/signup.service';
+import { FriendRequestService } from './services/friend-request.service';
 
 import { ProfileWallResolver } from './services/profile-wall-resolver.service';
 
 import { appRoutes } from './app.routes';
 
-
-
-
-
-
-
+import { StorageService } from './services/storage.service';
 
 @NgModule({
   declarations: [
@@ -41,14 +38,15 @@ import { appRoutes } from './app.routes';
     HomeComponent,
     ProfileComponent,
     FriendComponent,
+    FriendRequestComponent,
     UserComponent,
     PostComponent,
     PostListComponent,
-    FriendListComponent,
     SignupComponent,
     ProfileWallComponent,
     WallNewPostComponent,
-    WallPostsComponent
+    WallPostsComponent,
+    SignupComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,7 +55,7 @@ import { appRoutes } from './app.routes';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [LoginService, SignupService, ProfileWallResolver],
+  providers: [LoginService, SignupService, FriendRequestService, StorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

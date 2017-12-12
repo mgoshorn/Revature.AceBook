@@ -1,7 +1,7 @@
 export class SignUp {
     firstName: string;
     lastName: string;
-    birthday: any;
+    birthdate: any;
     email: string;
     username: string;
     password: string;
