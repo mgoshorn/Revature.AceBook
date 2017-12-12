@@ -19,7 +19,7 @@ export class LoginService {
     this.http.post(environment.context + 'users/login', credentials, {withCredentials: true})
     .subscribe( (success) => {
       if (success !== '') {
-        this.storageService.getCredentialsFromLoginService(credentials);
+        this.storageService.getCredentials(credentials);
 
         this.user = Object.assign(new User, success);
         this.storageService.setUser(this.user);
