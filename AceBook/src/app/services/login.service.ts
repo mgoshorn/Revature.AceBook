@@ -16,7 +16,9 @@ export class LoginService {
     this.http.post(environment.context + 'users/login', credentials, {withCredentials: true})
     .subscribe( (success) => {
       if (success !== '') {
-        this.storageService.storeCredentials(credentials);
+        this.storageService.storedCredentials(credentials);
+        console.log(success);
+        this.storageService.storedUser(success);
         this.router.navigateByUrl('profile');
       }
     }, (error) => {
