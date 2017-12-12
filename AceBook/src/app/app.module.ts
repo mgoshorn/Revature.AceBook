@@ -12,7 +12,9 @@ import { HomeComponent } from '../app/components/home/home.component';
 import { UserComponent } from '../app/components/home/user/user.component';
 import { ProfileComponent } from '../app/components/profile/profile.component';
 import { FriendComponent } from '../app/components/home/friend/friend.component';
-import { FriendListComponent } from './components/friend/friend-list/friend-list.component';
+import {FriendListComponent } from '../app/components/friend/friend-list/friend-list.component';
+import { FriendRequestComponent } from './components/friend/friend-request/friend-request.component';
+
 import { PostComponent } from './components/post/post.component';
 import { PostListComponent } from './components/post/post-list/post-list.component';
 import { SignupComponent } from './components/signup/signup.component';
@@ -35,10 +37,11 @@ import { appRoutes } from './app.routes';
     HomeComponent,
     ProfileComponent,
     FriendComponent,
+    FriendListComponent,
+    FriendRequestComponent,
     UserComponent,
     PostComponent,
     PostListComponent,
-    FriendListComponent,
     SignupComponent
   ],
   imports: [
