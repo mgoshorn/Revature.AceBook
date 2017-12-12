@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from '../../../services/login.service';
+import { Credentials } from '../../../models/credentials';
+import { StorageService } from '../../../services/storage.service';
 
 @Component({
   selector: 'app-friend-request',
@@ -7,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FriendRequestComponent implements OnInit {
 
-  constructor() { }
+  pending_requests: any[];
+  credentials: Credentials;
+
+  constructor(private storageService: StorageService) { }
 
   ngOnInit() {
+    this.getCredentials();
+  }
+
+  getCredentials() {
+    this.credentials = this.storageService.getCredentials();
   }
 
 }

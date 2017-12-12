@@ -12,7 +12,6 @@ import { HomeComponent } from '../app/components/home/home.component';
 import { UserComponent } from '../app/components/home/user/user.component';
 import { ProfileComponent } from '../app/components/profile/profile.component';
 import { FriendComponent } from '../app/components/home/friend/friend.component';
-import {FriendListComponent } from '../app/components/friend/friend-list/friend-list.component';
 import { FriendRequestComponent } from './components/friend/friend-request/friend-request.component';
 
 import { PostComponent } from './components/post/post.component';
@@ -21,14 +20,11 @@ import { SignupComponent } from './components/signup/signup.component';
 
 import { LoginService } from '../app/services/login.service';
 import { SignupService } from './services/signup.service';
+import { FriendRequestService } from './services/friend-request.service';
+
+import { StorageService } from './services/storage.service';
 
 import { appRoutes } from './app.routes';
-
-
-
-
-
-
 
 @NgModule({
   declarations: [
@@ -37,7 +33,6 @@ import { appRoutes } from './app.routes';
     HomeComponent,
     ProfileComponent,
     FriendComponent,
-    FriendListComponent,
     FriendRequestComponent,
     UserComponent,
     PostComponent,
@@ -51,7 +46,7 @@ import { appRoutes } from './app.routes';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [LoginService, SignupService],
+  providers: [LoginService, SignupService, FriendRequestService, StorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
