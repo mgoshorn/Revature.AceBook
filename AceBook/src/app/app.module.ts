@@ -16,13 +16,17 @@ import { FriendListComponent } from './components/friend/friend-list/friend-list
 import { PostComponent } from './components/post/post.component';
 import { PostListComponent } from './components/post/post-list/post-list.component';
 import { SignupComponent } from './components/signup/signup.component';
-import { ProfileWallComponent } from './profile-wall/profile-wall.component';
-import { WallNewPostComponent } from './wall-new-post/wall-new-post.component';
+import { ProfileWallComponent } from './components/profile-wall/profile-wall.component';
+import { WallNewPostComponent } from './components/wall-new-post/wall-new-post.component';
+import { WallPostsComponent } from './components/wall-posts/wall-posts.component';
 
 import { LoginService } from '../app/services/login.service';
 import { SignupService } from './services/signup.service';
 
+import { ProfileWallResolver } from './services/profile-wall-resolver.service';
+
 import { appRoutes } from './app.routes';
+
 
 
 
@@ -43,7 +47,8 @@ import { appRoutes } from './app.routes';
     FriendListComponent,
     SignupComponent,
     ProfileWallComponent,
-    WallNewPostComponent
+    WallNewPostComponent,
+    WallPostsComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +57,7 @@ import { appRoutes } from './app.routes';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [LoginService, SignupService],
+  providers: [LoginService, SignupService, ProfileWallResolver],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
