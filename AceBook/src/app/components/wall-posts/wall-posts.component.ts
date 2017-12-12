@@ -15,7 +15,7 @@ export class WallPostsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-
+    //this.posts = 
   }
 
 }

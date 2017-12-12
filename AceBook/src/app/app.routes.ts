@@ -9,22 +9,40 @@ import { SignupComponent } from './components/signup/signup.component';
 import { WallData } from './models/wall-data';
 import { ProfileWallResolver } from './services/profile-wall-resolver.service';
 export const appRoutes: Routes = [
-    {
-      path: 'login',
-      component: LoginComponent,
-      pathMatch: 'full'
-    },
-    {
-      path: 'signup',
-      component: SignupComponent
-    },
-    {
-      path: 'profile/{:id}',
-      component: ProfileComponent
-    },
-    {
-      path: '**',
-      pathMatch: 'full',
-      redirectTo: '/login'
-    }
-  ];
+  {
+    path: 'login',
+    component: LoginComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'signup',
+    component: SignupComponent
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
+    pathMatch: 'full',
+    children: [
+      {
+        path: 'user',
+        component: UserComponent,
+        pathMatch: 'full',
+      },
+      {
+          path: 'profile',
+          component: ProfileComponent,
+          pathMatch: 'full',
+      },
+      {
+          path: 'friend',
+          component: FriendComponent,
+          pathMatch: 'full',
+      }
+    ]
+  },
+  {
+    path: '**',
+    pathMatch: 'full',
+    redirectTo: '/login'
+  }
+];
