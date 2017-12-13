@@ -16,11 +16,15 @@ export class LoginService {
   login(credentials) {
     this.http.post<User>(environment.context + 'users/login', credentials, {withCredentials: true})
     .subscribe( (success) => {
+      console.log('success');
       this.storageService.storedCredentials(credentials);
       console.log(success);
       this.storageService.storedUser(success);
-      this.router.navigateByUrl('profile/' + success);
+      console.log('profile/' + success.user_id);
+      // this.router.navigateByUrl('signup');
+      this.router.navigateByUrl('profile/' + success.user_id );
     }, (error) => {
+      console.log('error');
       alert('failed to login');
     });
   }

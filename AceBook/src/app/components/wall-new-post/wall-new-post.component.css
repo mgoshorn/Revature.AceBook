@@ -14,8 +14,16 @@
     display: block;
     box-sizing: border-box;
     width: 100%;
-    min-height: 120px;
     padding: 1vmin;
+    min-height: 8rem;
+    transition: min-height 250ms ease-in-out;
+    height: auto;
+
+}
+
+#new-wall-post-input:invalid:not(:focus) {
+    min-height: 2vmin;
+    max-height: 3rem;
 }
 
 #new-wall-post-button {

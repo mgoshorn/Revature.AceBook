@@ -10,12 +10,12 @@ import { WallPost } from '../../models/WallPost';
 
 export class WallPostsComponent implements OnInit {
 
-  @Input() posts: Array<WallPost> = null;
+  @Input() posts: Array<WallPost> = [];
 
   constructor() { }
 
   ngOnInit() {
-    //this.posts = 
+    console.log(this.posts);
   }
 
 }

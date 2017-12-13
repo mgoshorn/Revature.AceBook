@@ -46,7 +46,6 @@ import { StorageService } from './services/storage.service';
     ProfileWallComponent,
     WallNewPostComponent,
     WallPostsComponent,
-    SignupComponent,
   ],
   imports: [
     BrowserModule,

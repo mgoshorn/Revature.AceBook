@@ -4,6 +4,7 @@ import { environment } from '../../../environments/environment';
 import { WallPost } from '../../models/WallPost';
 import { WallData } from '../../models/wall-data';
 import { HttpClient } from '@angular/common/http';
+import { Credentials } from '../../models/credentials';
 
 @Component({
   selector: 'app-profile-wall',
@@ -14,7 +15,9 @@ export class ProfileWallComponent implements OnInit {
 
   id: number;
   private sub: any;
-  wallData: WallData;
+  wallData: WallData = new WallData;
+
+  testData: Credentials;
 
   constructor(private route: ActivatedRoute, private httpClient: HttpClient) { }
 
@@ -22,8 +25,12 @@ export class ProfileWallComponent implements OnInit {
     this.sub = this.route.params.subscribe(params => {
       this.id = +params['id'];
 
+      this.testData = new Credentials();
+      this.testData.username = 'user2';
+      this.testData.password = 'pass2';
+
       this.httpClient
-      .post<Array<WallPost>>(environment.context + '/wall/read/' + this.id, {'withCredentials': true})
+      .post<Array<WallPost>>(environment.context + 'wall/read/' + this.id, this.testData, {'withCredentials': true})
       .subscribe(data => {
         this.wallData.data = data;
       });

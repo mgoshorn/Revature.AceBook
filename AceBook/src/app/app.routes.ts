@@ -19,26 +19,8 @@ export const appRoutes: Routes = [
     component: SignupComponent
   },
   {
-    path: 'profile',
+    path: 'profile/:id',
     component: ProfileComponent,
-    pathMatch: 'full',
-    children: [
-      {
-        path: 'user',
-        component: UserComponent,
-        pathMatch: 'full',
-      },
-      {
-          path: 'profile',
-          component: ProfileComponent,
-          pathMatch: 'full',
-      },
-      {
-          path: 'friend',
-          component: FriendComponent,
-          pathMatch: 'full',
-      }
-    ]
   },
   {
     path: '**',
