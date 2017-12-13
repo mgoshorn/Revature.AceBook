@@ -10,9 +10,13 @@ export class StorageService {
 
   constructor() { }
 
-  getCredentials(credentials: Credentials) {
+  setCredentials(credentials: Credentials) {
     this.credentials = credentials;
     console.log(this.credentials);
+  }
+
+  getCredentials() {
+    return this.credentials;
   }
 
   setUser(user: User) {
