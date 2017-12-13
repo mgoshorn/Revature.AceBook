@@ -1,0 +1,12 @@
+    .list-group-item img {
+       height:80px; 
+       width:80px;
+   }
+    .name {
+       color:#5bc0de;    
+   }
+
+   ul {
+       list-style-type: none;
+   }
+
