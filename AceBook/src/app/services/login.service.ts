@@ -7,22 +7,23 @@ import { Credentials } from '../models/credentials';
 import { User } from '../models/User';
 import { StorageService } from './storage.service';
 
+
 @Injectable()
 export class LoginService {
 
+  user: User;
 
   constructor(private http: HttpClient, private router: Router, private storageService: StorageService) { }
 
   login(credentials) {
     this.http.post<User>(environment.context + 'users/login', credentials, {withCredentials: true})
     .subscribe( (success) => {
-      console.log('success');
-      this.storageService.storedCredentials(credentials);
-      console.log(success);
-      this.storageService.storedUser(success);
+      this.storageService.getCredentials(credentials);
+      this.user = Object.assign(new User, success);
+      this.storageService.setUser(this.user);
       console.log('profile/' + success.user_id);
       // this.router.navigateByUrl('signup');
-      this.router.navigateByUrl('profile/' + success.user_id );
+      this.router.navigateByUrl('profile/' + this.user.user_id );
     }, (error) => {
       console.log('error');
       alert('failed to login');
