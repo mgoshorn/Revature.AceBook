@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../../models/user';
+
+import { StorageService } from '../../services/storage.service';
+
 
 
 @Component({
@@ -8,9 +12,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  name = 'Conor';
+  user: User = this.storageService.getUser();
+  firstName = this.user.firstName;
+  lastName = this.user.lastName;
 
-  constructor() { }
+  constructor(private storageService: StorageService) { }
+
 
   ngOnInit() {
   }
