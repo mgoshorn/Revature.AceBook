@@ -18,7 +18,9 @@ import { FriendListComponent } from './components/friend/friend-list/friend-list
 import { PostComponent } from './components/post/post.component';
 import { PostListComponent } from './components/post/post-list/post-list.component';
 import { SignupComponent } from './components/signup/signup.component';
-import { ConversationComponent } from './components/conversation/conversation.component';
+import { ProfileWallComponent } from './components/profile-wall/profile-wall.component';
+import { WallNewPostComponent } from './components/wall-new-post/wall-new-post.component';
+import { WallPostsComponent } from './components/wall-posts/wall-posts.component';
 
 import { LoginService } from '../app/services/login.service';
 import { SignupService } from './services/signup.service';
@@ -27,6 +29,7 @@ import { FriendRequestService } from './services/friend-request.service';
 
 import { appRoutes } from './app.routes';
 import { StorageService } from './services/storage.service';
+import { WallPostService } from './services/wall-post.service';
 
 
 @NgModule({
@@ -39,6 +42,9 @@ import { StorageService } from './services/storage.service';
     PostComponent,
     PostListComponent,
     SignupComponent,
+    ProfileWallComponent,
+    WallNewPostComponent,
+    WallPostsComponent,
     FriendComponent,
     FriendListComponent,
     FriendRequestComponent
@@ -50,7 +56,7 @@ import { StorageService } from './services/storage.service';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [LoginService, SignupService, FriendRequestService, StorageService],
+  providers: [LoginService, SignupService, FriendRequestService, StorageService, WallPostService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

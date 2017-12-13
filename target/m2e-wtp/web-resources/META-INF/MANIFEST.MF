@@ -1,5 +1,9 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: sjh81
+=======
+Built-By: BlueT
+>>>>>>> 1f55fb7878e8b2c5128dee555c52a04ec2bc2a72
 Build-Jdk: 1.8.0_151
 Created-By: Maven Integration for Eclipse
 

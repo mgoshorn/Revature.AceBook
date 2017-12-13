@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 
 import { environment } from '../../environments/environment';
 import { Credentials } from '../models/credentials';
+import { User } from '../models/User';
 import { StorageService } from './storage.service';
-import { User } from '../models/user';
 
 
 @Injectable()
@@ -15,18 +15,17 @@ export class LoginService {
 
   constructor(private http: HttpClient, private router: Router, private storageService: StorageService) { }
 
-  login(credentials: Credentials) {
-    this.http.post(environment.context + 'users/login', credentials, {withCredentials: true})
+  login(credentials) {
+    this.http.post<User>(environment.context + 'users/login', credentials, {withCredentials: true})
     .subscribe( (success) => {
-      if (success !== '') {
-        this.storageService.getCredentials(credentials);
-
-        this.user = Object.assign(new User, success);
-        this.storageService.setUser(this.user);
-
-        this.router.navigateByUrl('profile');
-      }
+      this.storageService.setCredentials(credentials);
+      this.user = Object.assign(new User, success);
+      this.storageService.setUser(this.user);
+      console.log('profile/' + success.user_id);
+      // this.router.navigateByUrl('signup');
+      this.router.navigateByUrl('profile/' + this.user.user_id );
     }, (error) => {
+      console.log('error');
       alert('failed to login');
     });
   }

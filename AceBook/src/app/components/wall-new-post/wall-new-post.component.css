@@ -1,0 +1,32 @@
+#container {
+    margin: 1vmin;
+    padding: 1vmin;
+    box-sizing: border-box;
+    position: relative;
+    background: #e7e7e7;
+    border-radius: 0.5vmin;
+}
+#container > *:not(:first-child) {
+    margin-top: 1vmin;
+}
+
+#new-wall-post-input {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 1vmin;
+    min-height: 8rem;
+    transition: min-height 250ms ease-in-out;
+    height: auto;
+
+}
+
+#new-wall-post-input:invalid:not(:focus) {
+    min-height: 2vmin;
+    max-height: 3rem;
+}
+
+#new-wall-post-button {
+    display: block;
+    margin-left: auto;
+}
