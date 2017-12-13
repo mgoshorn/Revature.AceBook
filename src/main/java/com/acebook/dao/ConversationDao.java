@@ -14,4 +14,6 @@ public interface ConversationDao {
 	Conversation merge(Conversation Conversation);
 	
 	boolean delete(Conversation Conversation);
+
+	Conversation getAll(int id);
 }

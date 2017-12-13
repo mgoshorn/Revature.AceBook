@@ -1,16 +1,29 @@
 package com.acebook.entities;
 
+import java.time.LocalDateTime;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Message {
 	
 	@Id
+	@Column(name = "message_id")
 	private int msgID;
-	private int conversationID;
+	
+	@ManyToOne
+	@JoinColumn(name="conversation_id")
+	private Conversation conversation;
+	
 	private String content;
+	@Column(name = "sender_id")
 	private int senderID;
+	@Column(name = "post_timestamp")
+	private LocalDateTime postTime;
 	
 	public int getMsgID() {
 		return msgID;
@@ -18,11 +31,17 @@ public class Message {
 	public void setMsgID(int msgID) {
 		this.msgID = msgID;
 	}
-	public int getConversationID() {
-		return conversationID;
+	public Conversation getConversation() {
+		return conversation;
 	}
-	public void setConversationID(int conversationID) {
-		this.conversationID = conversationID;
+	public void setConversation(Conversation conversation) {
+		this.conversation = conversation;
+	}
+	public LocalDateTime getPostTime() {
+		return postTime;
+	}
+	public void setPostTime(LocalDateTime postTime) {
+		this.postTime = postTime;
 	}
 	public String getContent() {
 		return content;
@@ -36,6 +55,5 @@ public class Message {
 	public void setSenderID(int senderID) {
 		this.senderID = senderID;
 	}
-	
 	
 }

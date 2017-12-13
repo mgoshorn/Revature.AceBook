@@ -2,6 +2,7 @@ package com.acebook.dao;
 
 import com.acebook.entities.Message;
 
+
 public interface MessageDao {
 	
 	Message save(Message Message);
@@ -14,4 +15,5 @@ public interface MessageDao {
 	Message merge(Message Message);
 	
 	boolean delete(Message Message);
+	
 }
