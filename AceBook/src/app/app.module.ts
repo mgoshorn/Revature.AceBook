@@ -21,6 +21,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { ProfileWallComponent } from './components/profile-wall/profile-wall.component';
 import { WallNewPostComponent } from './components/wall-new-post/wall-new-post.component';
 import { WallPostsComponent } from './components/wall-posts/wall-posts.component';
+import { ConversationComponent } from './components/conversation/conversation.component';
 
 import { LoginService } from '../app/services/login.service';
 import { SignupService } from './services/signup.service';
@@ -47,7 +48,8 @@ import { WallPostService } from './services/wall-post.service';
     WallPostsComponent,
     FriendComponent,
     FriendListComponent,
-    FriendRequestComponent
+    FriendRequestComponent,
+    ConversationComponent
   ],
   imports: [
     BrowserModule,
