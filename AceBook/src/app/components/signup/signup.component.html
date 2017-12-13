@@ -4,9 +4,13 @@
         <span id="reauth-username" class="reauth-username"></span>
         <input [(ngModel)]="signup.firstName" name="firstName" type="text" id="inputFirstName" class="form-control" placeholder="First name" required>
         <input [(ngModel)]="signup.lastName" name="lastName" type="text" id="inputLastName" class="form-control" placeholder="Last name" required>
+
+        <input [(ngModel)]="signup.birthdate" name="birthdate" type="text" id="inputBirthday" class="form-control" placeholder="Birthday" >
+
         
         <input [(ngModel)]="signup.birthdate" name="birthdate" type="date" id="inputBirthdate" class="form-control" placeholder="Birthdate" >
         
+
         <input [(ngModel)]="signup.email" name="email" type="email" id="inputEmail" class="form-control" placeholder="Email" required>
         <input [(ngModel)]="signup.username" name="username" type="text" id="inputUsername" class="form-control" placeholder="Username" required>
         <input [(ngModel)]="signup.password" name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
@@ -14,5 +18,3 @@
     </form>
   </div>
 </div>
-
-<!-- firstname lastname email username password-->

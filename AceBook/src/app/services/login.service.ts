@@ -4,22 +4,31 @@ import { Router } from '@angular/router';
 
 import { environment } from '../../environments/environment';
 import { Credentials } from '../models/credentials';
+import { StorageService } from './storage.service';
+import { User } from '../models/user';
+
 
 @Injectable()
 export class LoginService {
 
-  constructor(private http: HttpClient, private router: Router) { }
+  user: User;
 
-  login(credentials) {
+  constructor(private http: HttpClient, private router: Router, private storageService: StorageService) { }
+
+  login(credentials: Credentials) {
     this.http.post(environment.context + 'users/login', credentials, {withCredentials: true})
     .subscribe( (success) => {
       if (success !== '') {
+        this.storageService.getCredentials(credentials);
+
+        this.user = Object.assign(new User, success);
+        this.storageService.setUser(this.user);
+
         this.router.navigateByUrl('profile');
       }
     }, (error) => {
       alert('failed to login');
     });
   }
-
 
 }

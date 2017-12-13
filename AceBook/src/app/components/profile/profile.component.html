@@ -5,20 +5,17 @@
             <img align="left" class="fb-image-lg" src="https://www.rctech.net/forum/attachments/painting-designs-graphics-photography/313869d1203642308-vector-mystery-machine-untitled-1.jpg" alt="Profile image example"/>
             <img align="left" class="fb-image-profile thumbnail" src="https://upload.wikimedia.org/wikipedia/it/3/33/Shaggy_Rogers.jpg" alt="Profile image"/>
             <div class="fb-profile-text">
-                <h1>Shaggy Rogers</h1>
+                <h1>{{firstName}} {{lastName}}</h1>
                 <p>Enjoys Snacking.</p>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-4">
-            <app-friend-list></app-friend-list>
+        <div class="col-md-6" style="border: solid">
+            <app-friend></app-friend>
         </div>
-        <div class="col-sm-4">
-            <app-post-list></app-post-list>
-        </div>
-        <div class="col-sm-4">
-            <app-conversation></app-conversation>
-        </div>
+        <div class="col-md-6" style="border: solid">
+                <app-post-list></app-post-list>
+            </div>
     </div>
 </div> <!-- /container -->  
