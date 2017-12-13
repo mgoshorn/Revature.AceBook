@@ -5,6 +5,7 @@ import { WallPost } from '../../models/WallPost';
 import { WallData } from '../../models/wall-data';
 import { HttpClient } from '@angular/common/http';
 import { Credentials } from '../../models/credentials';
+import { StorageService } from '../../services/storage.service';
 
 @Component({
   selector: 'app-profile-wall',
@@ -19,18 +20,26 @@ export class ProfileWallComponent implements OnInit {
 
   testData: Credentials;
 
-  constructor(private route: ActivatedRoute, private httpClient: HttpClient) { }
+  constructor(private route: ActivatedRoute, private httpClient: HttpClient, private storageService: StorageService) { }
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
       this.id = +params['id'];
 
-      this.testData = new Credentials();
-      this.testData.username = 'user2';
-      this.testData.password = 'pass2';
+      this.httpClient
+      .post<Array<WallPost>>(environment.context + 'wall/read/' + this.id, this.storageService.getCredentials(), {'withCredentials': true})
+      .subscribe(data => {
+        this.wallData.data = data;
+      });
+   });
+  }
+
+  addPost(post: WallPost) {
+    this.sub = this.route.params.subscribe(params => {
+      this.id = +params['id'];
 
       this.httpClient
-      .post<Array<WallPost>>(environment.context + 'wall/read/' + this.id, this.testData, {'withCredentials': true})
+      .post<Array<WallPost>>(environment.context + 'wall/read/' + this.id, this.storageService.getCredentials(), {'withCredentials': true})
       .subscribe(data => {
         this.wallData.data = data;
       });

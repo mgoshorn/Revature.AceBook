@@ -18,7 +18,7 @@ export class LoginService {
   login(credentials) {
     this.http.post<User>(environment.context + 'users/login', credentials, {withCredentials: true})
     .subscribe( (success) => {
-      this.storageService.getCredentials(credentials);
+      this.storageService.setCredentials(credentials);
       this.user = Object.assign(new User, success);
       this.storageService.setUser(this.user);
       console.log('profile/' + success.user_id);

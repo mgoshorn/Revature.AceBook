@@ -29,6 +29,7 @@ import { FriendRequestService } from './services/friend-request.service';
 
 import { appRoutes } from './app.routes';
 import { StorageService } from './services/storage.service';
+import { WallPostService } from './services/wall-post.service';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,7 @@ import { StorageService } from './services/storage.service';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [LoginService, SignupService, FriendRequestService, StorageService],
+  providers: [LoginService, SignupService, FriendRequestService, StorageService, WallPostService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

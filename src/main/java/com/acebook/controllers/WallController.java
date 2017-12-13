@@ -32,7 +32,7 @@ public class WallController {
 	@PostMapping("post/{userId}")
 	public WallPost handlePostToWall(@PathVariable("userId") int userId,
 						@RequestBody PostRequest postRequest) {
-		
+		log.trace("Incoming request: " + postRequest);
 		return ws.wallPost(userId, postRequest);
 	}
 	
