@@ -15,6 +15,10 @@ export class StorageService {
     // console.log(this.credentials);
   }
 
+  getCredentials() {
+    return this.credentials;
+  }
+
   setUser(user: User) {
     this.user = user;
     // console.log(this.user);
