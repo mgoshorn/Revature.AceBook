@@ -2,11 +2,11 @@
   <header>
       <div id="imgContainer">
         <a href="../#/profile/{{post.poster.user_id}}">
-          <img id="userImg"  src="//ssl.gstatic.com/accounts/ui/avatar_2x.png">
+          <img id="userImg"  src="{{profileImageLoc + post.poster.user_id}}">
         </a>
       </div>
       <div id="details">
-          <a>
+          <a href="../#/profile/{{post.poster.user_id}}">
               <div id="nameTag">{{post.poster.firstName}} {{post.poster.lastName}}</div>
           </a>
           <div id="postTime">{{post.postTime[3]}}:{{post.postTime[4]}}, {{post.postTime[0]}}-{{post.postTime[1]}}-{{post.postTime[2]}}</div>

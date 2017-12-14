@@ -1,11 +1,18 @@
 package com.acebook.services;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.time.format.DateTimeParseException;
+import java.util.Base64;
+import java.util.Base64.Decoder;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.imageio.ImageIO;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.log4j.Logger;
@@ -17,8 +24,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.HttpClientErrorException;
 
 import com.acebook.beans.Credentials;
+import com.acebook.beans.ProfilePhotoUpload;
 import com.acebook.beans.SignUp;
+import com.acebook.beans.UserImage;
 import com.acebook.dao.UserDao;
+import com.acebook.entities.ProfileImages;
 import com.acebook.entities.User;
 
 @Service
@@ -235,6 +245,60 @@ public class UserServiceImpl implements UserService{
 			Hibernate.initialize(friend);
 		}
 		return friends;
+	}
+
+	@Override
+	@Transactional
+	public void updateProfilePhoto(ProfilePhotoUpload upload) {
+		User user = mustAuthenticate(upload.getCredentials());
+		log.trace("Setting user profile image data");
+		
+		log.trace(user.getImages());
+		ProfileImages images = user.getImages();
+		Hibernate.initialize(images);
+		log.trace(images == null);
+		if(images == null) {
+			user.setImages(new ProfileImages());
+			user.getImages().setUserId(user.getUser_id());
+		}
+		user.getImages().setProfileImage64(upload.getImage());
+		user.getImages().setProfileImageType(upload.getFileType());
+	}
+
+	@Override
+	public byte[] getProfileImage(int userId) throws IOException {
+		User user = dao.get(userId);
+		if(user == null) throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Null user request");
+		if(user.getImages() == null) throw new HttpClientErrorException(HttpStatus.NO_CONTENT, "No such image");
+		
+		Hibernate.initialize(user.getImages());
+		UserImage ui = new UserImage();
+		
+		ui.setImage(user.getImages().getProfileImage64());
+		ui.setImageType(user.getImages().getProfileImageType());
+		
+		BufferedImage image = null;
+		Decoder decoder = Base64.getDecoder();
+		byte[] imageArray = decoder.decode(ui.getImage());
+		return imageArray;
+//		ByteArrayInputStream bis = new ByteArrayInputStream(imageArray);
+//		image = ImageIO.read(bis);
+//		bis.close();
+//		return image;
+//	
+		
+		
+	}
+	
+	@Transactional
+	public List<User> getFriendRequests(int userId) {
+		User user = dao.get(userId);
+		if(user == null) throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Null user requested");
+		List<User> friendRequests = user.getFriendRequests();
+		for(User friendRequest : friendRequests)
+			Hibernate.initialize(friendRequest);
+		return friendRequests;
+		
 	}
 	
 	@Override

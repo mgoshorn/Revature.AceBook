@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -59,6 +60,7 @@ public class User {
 			@JoinColumn(name = "friend_2") })
 	private List<User> friends;
 	
+<<<<<<< HEAD
 	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "conversation", joinColumns = { @JoinColumn(name = "user_1") }, inverseJoinColumns = {
@@ -72,7 +74,20 @@ public class User {
 	public void setConversations(List<Conversation> conversations) {
 		this.conversations = conversations;
 	}
+=======
+	@ManyToMany
+	@JoinTable(name="friend_requests", joinColumns = { @JoinColumn(name="receiver") }, inverseJoinColumns = { @JoinColumn(name="sender") })
+	@JsonIgnore
+	private List<User> friendRequests;
+>>>>>>> ce4f79eef1dc3e065bf7794db1389f7b9e68d943
 
+	//User images
+	
+	@JoinColumn(name = "user_id")
+	@OneToOne(cascade = CascadeType.ALL)
+	private ProfileImages images;
+	
+	
 	public int getUser_id() {
 		return userId;
 	}
@@ -83,7 +98,7 @@ public class User {
 	}
 
 	public User(int userId, String username, String email, String firstName, String lastName, LocalDate birthdate,
-			String hash, String salt, List<User> friends) {
+			String hash, String salt, List<User> friends, List<User> friendRequests) {
 		super();
 		this.userId = userId;
 		this.username = username;
@@ -94,6 +109,7 @@ public class User {
 		this.hash = hash;
 		this.salt = salt;
 		this.friends = friends;
+		this.friendRequests = friendRequests;
 	}
 
 
@@ -170,6 +186,21 @@ public class User {
 	public List<User> getFriends() {
 		return friends;
 	}
+
+	public List<User> getFriendRequests() {
+		return friendRequests;
+	}
+
+	
+	public ProfileImages getImages() {
+		return images;
+	}
+	
+	public void setImages(ProfileImages images) {
+		this.images = images;
+	}
+
+
 
 	@Override
 	public int hashCode() {

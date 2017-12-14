@@ -27,6 +27,7 @@ import { NewMessageComponent } from './components/new-message/new-message.compon
 
 import { LoginService } from '../app/services/login.service';
 import { SignupService } from './services/signup.service';
+import { FriendService } from './services/friend.service';
 import { FriendRequestService } from './services/friend-request.service';
 
 
@@ -35,6 +36,9 @@ import { StorageService } from './services/storage.service';
 import { WallPostService } from './services/wall-post.service';
 import { MessageService } from './services/message.service';
 
+
+import { FeedComponent } from './components/feed/feed.component';
+import { ProfileImageUploadService } from './services/profile-image-upload.service';
 
 @NgModule({
   declarations: [
@@ -50,11 +54,15 @@ import { MessageService } from './services/message.service';
     WallNewPostComponent,
     WallPostsComponent,
     FriendComponent,
+<<<<<<< HEAD
     FriendListComponent,
     FriendRequestComponent,
     ConversationComponent,
     MessagesComponent,
     NewMessageComponent
+=======
+    FeedComponent
+>>>>>>> ce4f79eef1dc3e065bf7794db1389f7b9e68d943
   ],
   imports: [
     BrowserModule,
@@ -63,7 +71,13 @@ import { MessageService } from './services/message.service';
     ReactiveFormsModule,
     HttpClientModule
   ],
+<<<<<<< HEAD
   providers: [LoginService, SignupService, FriendRequestService, StorageService, WallPostService, MessageService ],
+=======
+  providers: [LoginService, SignupService, FriendRequestService, StorageService, WallPostService,
+    FriendService, ProfileImageUploadService ],
+
+>>>>>>> ce4f79eef1dc3e065bf7794db1389f7b9e68d943
   bootstrap: [AppComponent]
 })
 export class AppModule { }

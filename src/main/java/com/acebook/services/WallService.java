@@ -2,6 +2,7 @@ package com.acebook.services;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import org.springframework.web.client.HttpClientErrorException;
 
 import com.acebook.beans.Credentials;
 import com.acebook.beans.PostRequest;
+import com.acebook.beans.ProfilePhotoUpload;
 import com.acebook.dao.UserDao;
 import com.acebook.entities.User;
 import com.acebook.entities.WallPost;
@@ -23,6 +25,8 @@ public class WallService {
 	
 	@Autowired
 	UserDao userDao;
+	
+	private Logger log = Logger.getRootLogger();
 	
 	@Transactional
 	public WallPost wallPost(int targetUserId, PostRequest postRequest) {
@@ -59,6 +63,18 @@ public class WallService {
 		Hibernate.initialize(posts);
 		
 		return posts;
+	}
+
+	public void updateProfile(ProfilePhotoUpload upload) {
+		//validate is image type
+		if(!upload.getFileType().startsWith("image/")) 
+			throw new HttpClientErrorException(HttpStatus.UNSUPPORTED_MEDIA_TYPE, "Only image files allowed!");
+		
+		
+		us.updateProfilePhoto(upload);
+		
+		log.trace("User profile image updated");
+		
 	}
 	
 }
