@@ -1,7 +1,9 @@
+import { User } from './User';
+
 export class Message {
     msgID: number;
     conversationID: number;
     content: string;
-    senderID: number;
+    sender: User;
     posttime: Array<Number>;
 }

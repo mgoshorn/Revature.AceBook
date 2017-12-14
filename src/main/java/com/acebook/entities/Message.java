@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 import com.acebook.entities.User;
 
 @Entity
-public class Message {
+public class Message implements Comparable<Message> {
 	
 	@Id
 	@Column(name = "message_id")
@@ -23,8 +23,10 @@ public class Message {
 	
 	private String content;
 	
-	@Column(name = "sender_id")
-	private int senderID;
+	@ManyToOne
+	@JoinColumn(name = "sender_id")
+	private User sender;
+	
 	@Column(name = "post_timestamp")
 	private LocalDateTime postTime;
 	
@@ -32,10 +34,10 @@ public class Message {
 		super();
 	}
 	
-	public Message(Conversation conversation, String content, int senderID) {
+	public Message(Conversation conversation, String content, User sender) {
 		this.conversation = conversation;
 		this.content = content;
-		this.senderID = senderID;
+		this.sender = sender;
 		this.postTime = LocalDateTime.now();
 	}
 	
@@ -63,11 +65,16 @@ public class Message {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public int getSenderID() {
-		return senderID;
+	public User getSender() {
+		return sender;
 	}
-	public void setSenderID(int senderID) {
-		this.senderID = senderID;
+	public void setSender(User sender) {
+		this.sender = sender;
+	}
+
+	@Override
+	public int compareTo(Message m) {
+		return this.getPostTime().compareTo(m.getPostTime());
 	}
 	
 }

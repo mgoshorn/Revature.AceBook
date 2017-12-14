@@ -17,8 +17,6 @@
             <div  id="profile-details" class="fb-profile-text col-md-8">
                 <h1>{{firstName}} {{lastName}}</h1>
                 <p>Enjoys Snacking.</p>
-                <div><a href="../#/message/{{user_id}}">Messages</a></div>
-                <!--<div><a href="../#/message/startconversation{{user_id}}">Start Conversation</a></div>-->
                     <div id="container">
                         <textarea [(ngModel)]="conversationStart" required id="new-conversation-start" placeholder="Start a conversation"></textarea>
                         <input id="new-conversation-start-button" type="button" value="Start" class="btn btn-primary" (click)="convStart()">

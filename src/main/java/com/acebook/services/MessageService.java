@@ -1,5 +1,6 @@
 package com.acebook.services;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,6 +52,7 @@ public class MessageService {
 		Conversation conv = convDao.getByUsers(sender, receiver);
 		if(conv == null) throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Null conversation requested");
 		List<Message> messages = conv.getMessages();
+		Collections.sort(messages);
 		log.trace("\n");
 		log.trace("This is the array of messages: " + messages);
 		log.trace("\n");
@@ -63,12 +65,20 @@ public class MessageService {
 	
 	@Transactional
 	public Message sendMessage(int receiverId, PostRequest postRequest) {
+		boolean swap = false;
 		User sender = us.authenticate(postRequest.getCredentials()); 
 		log.trace("User who should send a message: " + sender);
 		if(sender == null) throw new HttpClientErrorException(HttpStatus.UNAUTHORIZED, "Unvalid user credentials");
 		User receiver = us.getUserById(receiverId);
 		log.trace("User who should receive a message: " + receiver);
 		if(receiver == null) throw new HttpClientErrorException(HttpStatus.UNAUTHORIZED, "Unvalid receiver id");
+		if(receiver.getUser_id()> sender.getUser_id()) {
+			User temp = receiver;
+			receiver = sender;
+			sender = temp;
+			swap = true;
+			
+		}
 		Conversation conv = convDao.getByUsers(sender, receiver);
 		log.trace("got conversation: " + conv);
 		if(conv == null) {
@@ -78,7 +88,13 @@ public class MessageService {
 			Hibernate.initialize(conv);
 		}
 		log.trace("here is the conversation: " + conv);
-		Message message = new Message(conv, postRequest.getPostbody(), sender.getUser_id());
+		Message message = new Message();
+		if(!swap) {
+			message = new Message(conv, postRequest.getPostbody(), sender);
+		}
+		else {
+			message = new Message(conv, postRequest.getPostbody(), receiver);
+		}
 		message = msgDao.save(message);
 		log.trace("here is the message: " + message);
 		Hibernate.initialize(message);

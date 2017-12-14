@@ -26,7 +26,7 @@ export class ConversationComponent implements OnInit {
       this.id = +params['id'];
       // this.receiver = +params['receiver'];
       // testdata
-      this.id = 2;
+      // this.id = 2;
       this.httpClient
       .post<Array<Message>>(environment.context + 'message/' + this.id, this.storageService.getCredentials(), {'withCredentials': true})
       .subscribe(data => {
@@ -40,7 +40,7 @@ export class ConversationComponent implements OnInit {
     this.sub = this.route.params.subscribe(params => {
       this.id = +params['id'];
       // testdata
-      this.id = 2;
+      // this.id = 2;
       this.httpClient
       .post<Array<Message>>(environment.context + 'message/' + this.id, this.storageService.getCredentials(), {'withCredentials': true})
       .subscribe(data => {

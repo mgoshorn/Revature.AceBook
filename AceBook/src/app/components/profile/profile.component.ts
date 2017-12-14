@@ -37,6 +37,7 @@ export class ProfileComponent implements OnInit {
     this.messageService.startConversation(this.conversationStart).subscribe(
         (data) => {
           //this.updateMessages.next(data);
+          alert('Conversation Started');
         }, (error) => {
           console.log('error Starting Conversation');
           alert('failed to Start Conversation');

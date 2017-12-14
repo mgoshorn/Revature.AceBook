@@ -19,7 +19,7 @@ export class NewMessageComponent implements OnInit {
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
-      // this.targetId = +params['id'];
+    this.targetId = +params['id'];
     });
   }
 
