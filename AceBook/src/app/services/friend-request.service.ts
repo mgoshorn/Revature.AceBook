@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Credentials } from '../models/credentials';
-import { HttpClient } from '@angular/common/http';
-import { StorageService } from './storage.service';
+
+import { StorageService } from '../services/storage.service';
+
 import { environment } from '../../environments/environment';
 import { User } from '../models/user';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class FriendRequestService {
@@ -11,7 +13,10 @@ export class FriendRequestService {
   credentials: Credentials = this.storageService.getCredentials();
   user: User = this.storageService.getUser();
 
-  constructor(private http: HttpClient, private storageService: StorageService) { }
+  constructor(private storageService: StorageService, private http: HttpClient) { }
+
+  getStoredCredentials() {
+  }
 
   getFriendRequests() {
     // const user = this.storageService.getUser();

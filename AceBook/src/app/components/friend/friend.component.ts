@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FriendService } from '../../services/friend.service';
-import { User } from '../../models/user';
 import { StorageService } from '../../services/storage.service';
 import { FriendRequestService } from '../../services/friend-request.service';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-friend',
@@ -52,6 +52,9 @@ export class FriendComponent implements OnInit {
   }
 
   acceptFriendRequest(userId) {
-    this.friendRequestService.acceptRequest(userId);
+    this.friendRequestService.acceptRequest(userId)
+    .subscribe( (response) => {
+      console.log(response);
+    });
   }
 }
