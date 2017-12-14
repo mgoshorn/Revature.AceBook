@@ -2,12 +2,23 @@
 <div class="container">
     <div class="row">
         <div class="fb-profile">
-            <img align="left" class="fb-image-lg" src="https://www.rctech.net/forum/attachments/painting-designs-graphics-photography/313869d1203642308-vector-mystery-machine-untitled-1.jpg" alt="Profile image example"/>
-            <img align="left" class="fb-image-profile thumbnail" src="https://upload.wikimedia.org/wikipedia/it/3/33/Shaggy_Rogers.jpg" alt="Profile image"/>
-            <div class="fb-profile-text">
+            <img id="profile-header-image" src="https://www.rctech.net/forum/attachments/painting-designs-graphics-photography/313869d1203642308-vector-mystery-machine-untitled-1.jpg" alt="Profile image example"/>
+            
+            <div id="profile-image-container">
+                <!--<picture id="profile-image">
+                    <source srcset="{{profileImageLoc}}">
+                    <source srcset="http://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                    <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                </picture>-->
+                <img id="profile-image" src="{{profileImageLoc}}" alt="Profile image"/>        
+                <label for="profile-image-uploader" *ngIf="isOwnProfile()">⇯  Update Profile Photo</label>
+                <input (change)="uploadProfileImage($event)" id="profile-image-uploader" name="profileImage" type="file" accept="image/*" value="">
+            </div>
+            <div  id="profile-details" class="fb-profile-text col-md-8">
                 <h1>{{firstName}} {{lastName}}</h1>
                 <p>Enjoys Snacking.</p>
             </div>
+        
         </div>
     </div>
     <div class="row">

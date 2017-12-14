@@ -7,7 +7,6 @@ import { FriendComponent } from '../app/components/home/friend/friend.component'
 import { Profile } from 'selenium-webdriver/firefox';
 import { SignupComponent } from './components/signup/signup.component';
 import { WallData } from './models/wall-data';
-import { ProfileWallResolver } from './services/profile-wall-resolver.service';
 export const appRoutes: Routes = [
   {
     path: 'login',

@@ -1,5 +1,4 @@
 import { Component, OnInit, Input} from '@angular/core';
-import { ProfileWallResolver } from '../../services/profile-wall-resolver.service';
 import { WallPost } from '../../models/WallPost';
 
 @Component({
