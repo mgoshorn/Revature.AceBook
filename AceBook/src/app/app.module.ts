@@ -30,7 +30,9 @@ import { FriendRequestService } from './services/friend-request.service';
 import { appRoutes } from './app.routes';
 import { StorageService } from './services/storage.service';
 import { WallPostService } from './services/wall-post.service';
+
 import { FeedComponent } from './components/feed/feed.component';
+import { ProfileImageUploadService } from './services/profile-image-upload.service';
 
 @NgModule({
   declarations: [
@@ -55,7 +57,9 @@ import { FeedComponent } from './components/feed/feed.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [LoginService, SignupService, FriendRequestService, StorageService, WallPostService ],
+
+  providers: [LoginService, SignupService, FriendRequestService, StorageService, WallPostService, ProfileImageUploadService ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
