@@ -1,30 +1,31 @@
 package com.acebook.dao;
 
-import java.util.List;
-
+import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.acebook.entities.Conversation;
 import com.acebook.entities.Message;
 
 @Repository
 public class MessageDaoHibernate implements MessageDao {
 
+	private static final Logger log = Logger.getRootLogger();
+	
 	@Autowired
 	private SessionFactory sf;
 	
+	@Transactional
 	@Override
-	public Message save(Message Message) {
-		// TODO Auto-generated method stub
-		return null;
+	public Message save(Message message) {
+		log.trace("Saving Conversation");
+		sf.getCurrentSession().save(message);
+		return message;
 	}
 
 	@Override
-	public Message persist(Message Message) {
+	public Message persist(Message message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -42,19 +43,19 @@ public class MessageDaoHibernate implements MessageDao {
 	}
 
 	@Override
-	public Message update(Message Message) {
+	public Message update(Message message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Message merge(Message Message) {
+	public Message merge(Message message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean delete(Message Message) {
+	public boolean delete(Message message) {
 		// TODO Auto-generated method stub
 		return false;
 	}

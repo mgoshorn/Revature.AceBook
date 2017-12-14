@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.acebook.entities.User;
+
 @Entity
 public class Message {
 	
@@ -20,10 +22,22 @@ public class Message {
 	private Conversation conversation;
 	
 	private String content;
+	
 	@Column(name = "sender_id")
 	private int senderID;
 	@Column(name = "post_timestamp")
 	private LocalDateTime postTime;
+	
+	public Message() {
+		super();
+	}
+	
+	public Message(Conversation conversation, String content, int senderID) {
+		this.conversation = conversation;
+		this.content = content;
+		this.senderID = senderID;
+		this.postTime = LocalDateTime.now();
+	}
 	
 	public int getMsgID() {
 		return msgID;

@@ -22,6 +22,8 @@ import { ProfileWallComponent } from './components/profile-wall/profile-wall.com
 import { WallNewPostComponent } from './components/wall-new-post/wall-new-post.component';
 import { WallPostsComponent } from './components/wall-posts/wall-posts.component';
 import { ConversationComponent } from './components/conversation/conversation.component';
+import { MessagesComponent } from './components/messages/messages.component';
+import { NewMessageComponent } from './components/new-message/new-message.component';
 
 import { LoginService } from '../app/services/login.service';
 import { SignupService } from './services/signup.service';
@@ -31,6 +33,7 @@ import { FriendRequestService } from './services/friend-request.service';
 import { appRoutes } from './app.routes';
 import { StorageService } from './services/storage.service';
 import { WallPostService } from './services/wall-post.service';
+import { MessageService } from './services/message.service';
 
 
 @NgModule({
@@ -49,7 +52,9 @@ import { WallPostService } from './services/wall-post.service';
     FriendComponent,
     FriendListComponent,
     FriendRequestComponent,
-    ConversationComponent
+    ConversationComponent,
+    MessagesComponent,
+    NewMessageComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +63,7 @@ import { WallPostService } from './services/wall-post.service';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [LoginService, SignupService, FriendRequestService, StorageService, WallPostService ],
+  providers: [LoginService, SignupService, FriendRequestService, StorageService, WallPostService, MessageService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

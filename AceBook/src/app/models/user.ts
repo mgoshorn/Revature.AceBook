@@ -1,7 +1,9 @@
 export class User {
-    id: Number;
-    firstName: String;
-    lastName: String;
-    birthdate: Array<Number>;
-    username: String;
+    username: string;
+    firstName: string;
+    lastName: string;
+    birthdate: number[];
+    user_id: number;
+    email: string;
+    friends: any[];
 }

@@ -1,0 +1,11 @@
+<div class="message" *ngFor="let message of messages">
+    <div id="details">
+        <a>
+            <div id="nameTag">{{message.senderID}}</div>
+        </a>
+        <div id="postTime">{{message.postTime[3]}}:{{message.postTime[4]}}, {{message.postTime[0]}}-{{message.postTime[1]}}-{{message.postTime[2]}}</div>
+    </div>
+    <hr>
+    <div id="content">{{message.content}}</div>
+    
+</div>

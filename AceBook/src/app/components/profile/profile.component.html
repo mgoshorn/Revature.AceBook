@@ -7,18 +7,21 @@
             <div class="fb-profile-text">
                 <h1>{{firstName}} {{lastName}}</h1>
                 <p>Enjoys Snacking.</p>
+                <div><a href="../#/message/{{user_id}}">Messages</a></div>
+                <!--<div><a href="../#/message/startconversation{{user_id}}">Start Conversation</a></div>-->
+                    <div id="container">
+                        <textarea [(ngModel)]="conversationStart" required id="new-conversation-start" placeholder="Start a conversation"></textarea>
+                        <input id="new-conversation-start-button" type="button" value="Start" class="btn btn-primary" (click)="convStart()">
+                    </div>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-4" style="border: solid">
+        <div class="col-md-6" style="border: solid">
             <app-friend></app-friend>
         </div>
-        <div class="col-sm-4" style="border: solid">
+        <div class="col-md-6" style="border: solid">
             <app-profile-wall></app-profile-wall>
-        </div>
-        <div class="col-sm-4" style="border: solid">
-            <app-conversation></app-conversation>
         </div>
     </div>
 </div> <!-- /container -->  

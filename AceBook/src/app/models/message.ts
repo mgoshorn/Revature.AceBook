@@ -3,4 +3,5 @@ export class Message {
     conversationID: number;
     content: string;
     senderID: number;
+    posttime: Array<Number>;
 }

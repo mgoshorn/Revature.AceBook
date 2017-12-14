@@ -237,4 +237,10 @@ public class UserServiceImpl implements UserService{
 		return friends;
 	}
 	
+	@Override
+	public Optional<User> getByUsername(String username) {
+		Optional<User> user = dao.getUserByUsername(username);
+		return user;
+	}
+	
 }

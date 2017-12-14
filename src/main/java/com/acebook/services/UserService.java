@@ -1,6 +1,7 @@
 package com.acebook.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.acebook.beans.Credentials;
 import com.acebook.beans.SignUp;
@@ -19,5 +20,6 @@ public interface UserService {
 	public User mustGetUserById(int id);
 
 	public List<User> getFriends(int userId);
+	public Optional<User> getByUsername(String username);
 }
 	

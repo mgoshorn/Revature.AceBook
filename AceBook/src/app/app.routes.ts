@@ -8,6 +8,7 @@ import { Profile } from 'selenium-webdriver/firefox';
 import { SignupComponent } from './components/signup/signup.component';
 import { WallData } from './models/wall-data';
 import { ProfileWallResolver } from './services/profile-wall-resolver.service';
+import { ConversationComponent } from './components/conversation/conversation.component';
 export const appRoutes: Routes = [
   {
     path: 'login',
@@ -21,6 +22,10 @@ export const appRoutes: Routes = [
   {
     path: 'profile/:id',
     component: ProfileComponent,
+  },
+  {
+    path: 'message/:id',
+    component: ConversationComponent
   },
   {
     path: '**',
