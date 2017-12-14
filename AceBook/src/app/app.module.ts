@@ -13,7 +13,7 @@ import { UserComponent } from '../app/components/home/user/user.component';
 import { ProfileComponent } from '../app/components/profile/profile.component';
 import { FriendComponent } from '../app/components/friend/friend.component';
 import { FriendRequestComponent } from './components/friend/friend-request/friend-request.component';
-import { FriendListComponent } from './components/friend/friend-list/friend-list.component';
+import { FriendDetailComponent } from './components/friend-detail/friend-detail.component';
 
 import { PostComponent } from './components/post/post.component';
 import { PostListComponent } from './components/post/post-list/post-list.component';
@@ -29,6 +29,7 @@ import { FriendRequestService } from './services/friend-request.service';
 
 import { appRoutes } from './app.routes';
 import { StorageService } from './services/storage.service';
+import { FriendService } from './services/friend.service';
 import { WallPostService } from './services/wall-post.service';
 import { ProfileImageUploadService } from './services/profile-image-upload.service';
 
@@ -46,7 +47,7 @@ import { ProfileImageUploadService } from './services/profile-image-upload.servi
     WallNewPostComponent,
     WallPostsComponent,
     FriendComponent,
-    FriendListComponent,
+    FriendDetailComponent,
     FriendRequestComponent
   ],
   imports: [
@@ -56,7 +57,7 @@ import { ProfileImageUploadService } from './services/profile-image-upload.servi
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [LoginService, SignupService, FriendRequestService, StorageService, WallPostService, ProfileImageUploadService ],
+  providers: [LoginService, SignupService, FriendRequestService, StorageService, WallPostService, FriendService, ProfileImageUploadService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

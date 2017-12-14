@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FriendService } from '../../services/friend.service';
+import { User } from '../../models/user';
+import { StorageService } from '../../services/storage.service';
+import { FriendRequestService } from '../../services/friend-request.service';
 
 @Component({
   selector: 'app-friend',
@@ -7,9 +11,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FriendComponent implements OnInit {
 
-  constructor() { }
+  constructor(private friendService: FriendService, private storageService: StorageService,
+  private friendRequestService: FriendRequestService) {
+    this.setFriends();
+  }
+  friends: User[];
+  friend: User;
+  user: User;
+
 
   ngOnInit() {
   }
 
+  setFriends() {
+    this.friendService.getFriends()
+    .subscribe( (response) => {
+      this.friends = Object.assign(new Array<User>(), response);
+    });
+  }
+
+  getFriends() {
+    // console.log(this.friends);
+    return this.friends;
+  }
 }

@@ -18,12 +18,14 @@ export class LoginService {
   login(credentials) {
     this.http.post<User>(environment.context + 'users/login', credentials, {withCredentials: true})
     .subscribe( (success) => {
-      this.storageService.setCredentials(credentials);
-      this.user = Object.assign(new User, success);
-      this.storageService.setUser(this.user);
-      console.log('profile/' + success.user_id);
-      // this.router.navigateByUrl('signup');
-      this.router.navigateByUrl('profile/' + this.user.user_id );
+      if (success !== '') {
+        this.storageService.setCredentials(credentials);
+
+        this.user = Object.assign(new User, success);
+        this.storageService.setUser(this.user);
+
+        this.router.navigateByUrl('profile/' + this.user.user_id);
+      }
     }, (error) => {
       console.log('error');
       alert('failed to login');
