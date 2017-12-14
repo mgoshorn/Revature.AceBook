@@ -31,6 +31,7 @@ import { appRoutes } from './app.routes';
 import { StorageService } from './services/storage.service';
 import { FriendService } from './services/friend.service';
 import { WallPostService } from './services/wall-post.service';
+import { FeedComponent } from './components/feed/feed.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { WallPostService } from './services/wall-post.service';
     WallPostsComponent,
     FriendComponent,
     FriendDetailComponent,
-    FriendRequestComponent
+    FriendRequestComponent,
+    FeedComponent
   ],
   imports: [
     BrowserModule,
