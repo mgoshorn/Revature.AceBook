@@ -4,6 +4,7 @@ import { StorageService } from './storage.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Subject } from 'rxjs/Subject';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class ProfileImageUploadService {
@@ -11,7 +12,7 @@ export class ProfileImageUploadService {
   private resolutionSubject = new Subject<boolean>();
   resolution$ = this.resolutionSubject.asObservable();
 
-  constructor(private storageService: StorageService, private fb: FormBuilder, private http: HttpClient) {
+  constructor(private storageService: StorageService, private fb: FormBuilder, private http: HttpClient, private router: Router) {
     this.createForm();
   }
 
@@ -37,7 +38,10 @@ export class ProfileImageUploadService {
 
         this.http.post(environment.context + 'wall/profilePhoto/update', this.form.value, {withCredentials: true})
           .subscribe(
-            succ => this.resolutionSubject.next(true),
+            succ => {
+              this.resolutionSubject.next(true);
+              this.router.navigateByUrl('profile');
+            },
             err => this.resolutionSubject.next(false)
           );
       };

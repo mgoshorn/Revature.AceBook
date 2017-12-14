@@ -2,10 +2,10 @@
   <header>
       <div id="imgContainer">
         <a href="../#/profile/{{post.poster.user_id}}">
-          <img id="userImg"  src="//ssl.gstatic.com/accounts/ui/avatar_2x.png">
+          <img id="userImg"  src="{{profileImageLoc + post.poster.user_id}}">
         </a>
       </div>
-      <div>
+      <div id="details">
           <a href="../#/profile/{{post.poster.user_id}}">
               <div id="nameTag">{{post.poster.firstName}} {{post.poster.lastName}}</div>
           </a>
