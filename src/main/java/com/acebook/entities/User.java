@@ -60,7 +60,7 @@ public class User {
 			@JoinColumn(name = "friend_2") })
 	private List<User> friends;
 	
-<<<<<<< HEAD
+
 	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "conversation", joinColumns = { @JoinColumn(name = "user_1") }, inverseJoinColumns = {
@@ -74,12 +74,12 @@ public class User {
 	public void setConversations(List<Conversation> conversations) {
 		this.conversations = conversations;
 	}
-=======
+
 	@ManyToMany
 	@JoinTable(name="friend_requests", joinColumns = { @JoinColumn(name="receiver") }, inverseJoinColumns = { @JoinColumn(name="sender") })
 	@JsonIgnore
 	private List<User> friendRequests;
->>>>>>> ce4f79eef1dc3e065bf7794db1389f7b9e68d943
+
 
 	//User images
 	

@@ -54,15 +54,12 @@ import { ProfileImageUploadService } from './services/profile-image-upload.servi
     WallNewPostComponent,
     WallPostsComponent,
     FriendComponent,
-<<<<<<< HEAD
     FriendListComponent,
     FriendRequestComponent,
     ConversationComponent,
     MessagesComponent,
-    NewMessageComponent
-=======
+    NewMessageComponent,
     FeedComponent
->>>>>>> ce4f79eef1dc3e065bf7794db1389f7b9e68d943
   ],
   imports: [
     BrowserModule,
@@ -71,13 +68,9 @@ import { ProfileImageUploadService } from './services/profile-image-upload.servi
     ReactiveFormsModule,
     HttpClientModule
   ],
-<<<<<<< HEAD
-  providers: [LoginService, SignupService, FriendRequestService, StorageService, WallPostService, MessageService ],
-=======
   providers: [LoginService, SignupService, FriendRequestService, StorageService, WallPostService,
-    FriendService, ProfileImageUploadService ],
+    FriendService, ProfileImageUploadService, MessageService ],
 
->>>>>>> ce4f79eef1dc3e065bf7794db1389f7b9e68d943
   bootstrap: [AppComponent]
 })
 export class AppModule { }
