@@ -12,7 +12,7 @@ export class StorageService {
 
   setCredentials(credentials: Credentials) {
     this.credentials = credentials;
-    console.log(this.credentials);
+    // console.log(this.credentials);
   }
 
   getCredentials() {
@@ -21,7 +21,7 @@ export class StorageService {
 
   setUser(user: User) {
     this.user = user;
-    console.log(this.user);
+    // console.log(this.user);
   }
 
   getUser() {
