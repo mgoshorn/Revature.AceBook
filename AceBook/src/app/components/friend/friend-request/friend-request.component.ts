@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { FriendRequestService } from '../../../services/friend-request.service';
 @Component({
   selector: 'app-friend-request',
   templateUrl: './friend-request.component.html',
@@ -6,15 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FriendRequestComponent implements OnInit {
 
-  pending_requests: any[];
+  @Input() pendingRequests: any[];
 
-  constructor() { }
+  constructor(private friendRequestService: FriendRequestService) { }
 
   ngOnInit() {
-    this.getCredentials();
+
   }
 
-  getCredentials() {
+  acceptFriendRequest(userId) {
+    this.friendRequestService.acceptRequest(userId)
+    .subscribe( (response) => {
+      console.log(response);
+    });
   }
 
 }

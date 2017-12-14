@@ -50,11 +50,4 @@ export class FriendComponent implements OnInit {
   showFriendsToggle() {
     this.showFriends = !this.showFriends;
   }
-
-  acceptFriendRequest(userId) {
-    this.friendRequestService.acceptRequest(userId)
-    .subscribe( (response) => {
-      console.log(response);
-    });
-  }
 }

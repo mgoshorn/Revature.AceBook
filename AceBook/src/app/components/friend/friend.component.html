@@ -1,4 +1,13 @@
-<div *ngIf="showFriends;then friendList else requestList">Hello!</div>
+<button class="btn btn-success" (click)="buttonText = !buttonText"
+(click) = "showFriendsToggle()">
+{{ buttonText ? 'Show Requests' : 'Show Friends' }}
+</button>
+
+<app-friend-list [friends]="friends" *ngIf="showFriends"></app-friend-list>
+<app-friend-request [pendingRequests]="friendRequests" *ngIf="!showFriends"></app-friend-request>
+
+
+<!-- <div *ngIf="showFriends;then friendList else requestList">Hello!</div>
 
 <button class="btn btn-success pull-right" (click)="buttonText = !buttonText"
 (click) = "showFriendsToggle()">
@@ -29,10 +38,10 @@
                 </label>
                 <label class="pull-right">
                     <a  class="btn btn-success btn-xs glyphicon glyphicon-ok" title="Accept"
-                     (click)="acceptFriendRequest(request.user_id)"></a>
+                     (click)="acceptFriendRequest(request.user_id)" (click)="getFriends()"></a>
                     <a  class="btn btn-danger  btn-xs glyphicon glyphicon-trash" href="#" title="Decline"></a>
                 </label>
               </div>
         </li>
     </ul>
-</ng-template>
+</ng-template> -->
