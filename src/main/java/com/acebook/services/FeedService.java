@@ -26,8 +26,9 @@ public class FeedService {
 		User user = us.mustAuthenticate(credentials);
 		List<User> users = user.getFriends();
 		users.add(user);
-		return users.parallelStream()
-				.flatMap(u -> u.getWallPosts().parallelStream())
+		return users.stream()
+				.flatMap(u -> u.getWallPosts().stream())
+				.distinct()
 				.sequential()
 				.sorted(new FeedPostComparator())
 				.collect(Collectors.toList());
