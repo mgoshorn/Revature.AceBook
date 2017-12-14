@@ -33,6 +33,7 @@ import { WallPostService } from './services/wall-post.service';
 
 import { FeedComponent } from './components/feed/feed.component';
 import { ProfileImageUploadService } from './services/profile-image-upload.service';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { ProfileImageUploadService } from './services/profile-image-upload.servi
     WallNewPostComponent,
     WallPostsComponent,
     FriendComponent,
-    FeedComponent
+    FeedComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
