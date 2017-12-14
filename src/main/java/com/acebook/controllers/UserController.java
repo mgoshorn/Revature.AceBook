@@ -25,6 +25,7 @@ import com.acebook.services.UserService;
 
 @RestController
 @RequestMapping("users")
+@CrossOrigin(allowCredentials = "true", origins = "http://localhost:4200")
 public class UserController {
 	
 	@Autowired
@@ -33,7 +34,6 @@ public class UserController {
 	private static final Logger log = Logger.getRootLogger();
 	
 	@PostMapping("login")
-	@CrossOrigin(allowCredentials = "true", origins = "http://localhost:4200")
 	public ResponseEntity<User> login(@RequestBody Credentials credentials) {
 		User user = service.authenticate(credentials);
 		

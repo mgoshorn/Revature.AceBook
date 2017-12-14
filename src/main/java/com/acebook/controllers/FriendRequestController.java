@@ -20,6 +20,7 @@ import com.acebook.services.FriendRequestService;
 
 @RestController
 @RequestMapping("friendrequest")
+@CrossOrigin(allowCredentials = "true", origins = "http://localhost:4200")
 public class FriendRequestController {
 
 	@Autowired
