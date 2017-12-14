@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,12 +43,14 @@ public class FriendRequestController {
 	}
 	
 	@PostMapping("friend/{userIdString}")
+	@CrossOrigin(allowCredentials = "true", origins = "http://localhost:4200")
 	public FriendRequestState getState(@PathVariable("userIdString") int userId,
 			@RequestBody Credentials credentials) {
 		return service.handleFriendRequestState(credentials, userId);
 	}
 	
 	@PostMapping("accept/{userIdString}")
+	@CrossOrigin(allowCredentials = "true", origins = "http://localhost:4200")
 	public boolean acceptRequest(@PathVariable("userIdString") int userId,
 			@RequestBody Credentials credentials) {
 		return service.handleRequestResponse(credentials, userId, true);
@@ -55,6 +58,7 @@ public class FriendRequestController {
 	
 	
 	@PostMapping("deny/{userIdString}")
+	@CrossOrigin(allowCredentials = "true", origins = "http://localhost:4200")
 	public boolean denyRequest(@PathVariable("userIdString") int userId,
 			@RequestBody Credentials credentials) {
 		return service.handleRequestResponse(credentials, userId, false);

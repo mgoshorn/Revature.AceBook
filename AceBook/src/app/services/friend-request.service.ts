@@ -8,9 +8,17 @@ import { User } from '../models/user';
 @Injectable()
 export class FriendRequestService {
 
-  credentials: Credentials;
-  user: User;
+  credentials: Credentials = this.storageService.getCredentials();
+  user: User = this.storageService.getUser();
 
   constructor(private http: HttpClient, private storageService: StorageService) { }
 
+  getFriendRequests() {
+    // const user = this.storageService.getUser();
+    return this.http.get(environment.context + 'users/friendrequests/' + this.user.user_id.toString(), {withCredentials: true});
+  }
+
+  acceptRequest(userId) {
+    return this.http.post(environment.context + 'friendrequest/accept/' + userId, this.credentials, {withCredentials: true});
+  }
 }

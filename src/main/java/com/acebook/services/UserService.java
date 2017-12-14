@@ -19,5 +19,6 @@ public interface UserService {
 	public User mustGetUserById(int id);
 
 	public List<User> getFriends(int userId);
+	public List<User> getFriendRequests(int userId);
 }
 	

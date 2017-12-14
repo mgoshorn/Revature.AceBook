@@ -74,5 +74,11 @@ public class UserController {
 		return service.getFriends(userId);
 	}
 	
+	@GetMapping("friendrequests/{userId}")
+	@CrossOrigin(allowCredentials = "true", origins = "http://localhost:4200")
+	public List<User> getFriendsRequests(@PathVariable("userId") int userId) {
+		return service.getFriendRequests(userId);
+	}
+	
 	
 }

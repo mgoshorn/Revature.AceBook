@@ -14,10 +14,14 @@ export class FriendComponent implements OnInit {
   constructor(private friendService: FriendService, private storageService: StorageService,
   private friendRequestService: FriendRequestService) {
     this.setFriends();
+    this.getFriendRequests();
   }
   friends: User[];
   friend: User;
   user: User;
+  friendRequests: User[];
+  showFriends = true;
+  buttonText = true;
 
 
   ngOnInit() {
@@ -33,5 +37,21 @@ export class FriendComponent implements OnInit {
   getFriends() {
     // console.log(this.friends);
     return this.friends;
+  }
+
+  getFriendRequests() {
+    this.friendRequestService.getFriendRequests()
+    .subscribe ( (response) => {
+      this.friendRequests = Object.assign(new Array<User>(), response);
+      // console.log(this.friendRequests);
+    });
+  }
+
+  showFriendsToggle() {
+    this.showFriends = !this.showFriends;
+  }
+
+  acceptFriendRequest(userId) {
+    this.friendRequestService.acceptRequest(userId);
   }
 }

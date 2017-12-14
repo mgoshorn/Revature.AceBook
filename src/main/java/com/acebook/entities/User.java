@@ -58,6 +58,11 @@ public class User {
 	@JoinTable(name = "friendship", joinColumns = { @JoinColumn(name = "friend_1") }, inverseJoinColumns = {
 			@JoinColumn(name = "friend_2") })
 	private List<User> friends;
+	
+	@ManyToMany
+	@JoinTable(name="friend_requests", joinColumns = { @JoinColumn(name="receiver") }, inverseJoinColumns = { @JoinColumn(name="sender") })
+	@JsonIgnore
+	private List<User> friendRequests;
 
 	public int getUser_id() {
 		return userId;
@@ -69,7 +74,7 @@ public class User {
 	}
 
 	public User(int userId, String username, String email, String firstName, String lastName, LocalDate birthdate,
-			String hash, String salt, List<User> friends) {
+			String hash, String salt, List<User> friends, List<User> friendRequests) {
 		super();
 		this.userId = userId;
 		this.username = username;
@@ -80,6 +85,7 @@ public class User {
 		this.hash = hash;
 		this.salt = salt;
 		this.friends = friends;
+		this.friendRequests = friendRequests;
 	}
 
 
@@ -155,6 +161,9 @@ public class User {
 	
 	public List<User> getFriends() {
 		return friends;
+	}
+	public List<User> getFriendRequests() {
+		return friendRequests;
 	}
 
 	@Override
