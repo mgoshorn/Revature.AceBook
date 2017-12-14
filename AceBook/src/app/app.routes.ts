@@ -7,6 +7,8 @@ import { FriendComponent } from '../app/components/home/friend/friend.component'
 import { Profile } from 'selenium-webdriver/firefox';
 import { SignupComponent } from './components/signup/signup.component';
 import { WallData } from './models/wall-data';
+import { ProfileWallResolver } from './services/profile-wall-resolver.service';
+import { FeedComponent } from './components/feed/feed.component';
 export const appRoutes: Routes = [
   {
     path: 'login',
@@ -20,6 +22,10 @@ export const appRoutes: Routes = [
   {
     path: 'profile/:id',
     component: ProfileComponent,
+  },
+  {
+    path: 'feed',
+    component: FeedComponent
   },
   {
     path: '**',

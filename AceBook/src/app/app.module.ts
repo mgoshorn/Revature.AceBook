@@ -30,6 +30,8 @@ import { FriendRequestService } from './services/friend-request.service';
 import { appRoutes } from './app.routes';
 import { StorageService } from './services/storage.service';
 import { WallPostService } from './services/wall-post.service';
+
+import { FeedComponent } from './components/feed/feed.component';
 import { ProfileImageUploadService } from './services/profile-image-upload.service';
 
 @NgModule({
@@ -46,8 +48,7 @@ import { ProfileImageUploadService } from './services/profile-image-upload.servi
     WallNewPostComponent,
     WallPostsComponent,
     FriendComponent,
-    FriendListComponent,
-    FriendRequestComponent
+    FeedComponent
   ],
   imports: [
     BrowserModule,
