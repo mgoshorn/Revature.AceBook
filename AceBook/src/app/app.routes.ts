@@ -4,7 +4,6 @@ import { LoginComponent } from '../app/components/login/login.component';
 import { UserComponent } from '../app/components/home/user/user.component';
 import { ProfileComponent } from '../app/components/profile/profile.component';
 import { FriendComponent } from '../app/components/home/friend/friend.component';
-import { Profile } from 'selenium-webdriver/firefox';
 import { SignupComponent } from './components/signup/signup.component';
 import { WallData } from './models/wall-data';
 import { ConversationComponent } from './components/conversation/conversation.component';
@@ -29,7 +28,8 @@ export const appRoutes: Routes = [
   },
   {
     path: 'feed',
-    component: FeedComponent
+    component: FeedComponent,
+    pathMatch: 'full'
   },
   {
     path: '**',
