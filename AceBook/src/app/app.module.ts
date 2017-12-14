@@ -24,6 +24,7 @@ import { WallPostsComponent } from './components/wall-posts/wall-posts.component
 
 import { LoginService } from '../app/services/login.service';
 import { SignupService } from './services/signup.service';
+import { FriendService } from './services/friend.service';
 import { FriendRequestService } from './services/friend-request.service';
 
 
@@ -57,8 +58,8 @@ import { ProfileImageUploadService } from './services/profile-image-upload.servi
     ReactiveFormsModule,
     HttpClientModule
   ],
-
-  providers: [LoginService, SignupService, FriendRequestService, StorageService, WallPostService, ProfileImageUploadService ],
+  providers: [LoginService, SignupService, FriendRequestService, StorageService, WallPostService,
+    FriendService, ProfileImageUploadService ],
 
   bootstrap: [AppComponent]
 })

@@ -1,3 +1,38 @@
-<p>
-  friend still works!
-</p>
+<div *ngIf="showFriends;then friendList else requestList">Hello!</div>
+
+<button class="btn btn-success pull-right" (click)="buttonText = !buttonText"
+(click) = "showFriendsToggle()">
+{{ buttonText ? 'Show Requests' : 'Show Friends' }}
+</button>
+
+<ng-template #friendList>
+    <ul>
+        <li *ngFor="let friend of friends">
+            <div href="#" class="list-group-item text-left">
+                <img class="img-thumbnail" src="https://bootdey.com/img/Content/User_for_snippets.png">
+                <label class="name">
+                    {{ friend.firstName }} {{friend.lastName}}<br>
+                </label>
+                <div class="break"></div>
+            </div>
+        </li>
+    </ul>
+</ng-template>
+
+<ng-template #requestList>
+    <ul>
+        <li *ngFor="let request of friendRequests">
+            <div class="list-group-item text-left  text-left">
+                <img class="img-thumbnail" src="https://bootdey.com/img/Content/User_for_snippets.png">
+                <label class="name">
+                    <p>{{ request.firstName }} {{ request.lastName }}</p><br>
+                </label>
+                <label class="pull-right">
+                    <a  class="btn btn-success btn-xs glyphicon glyphicon-ok" title="Accept"
+                     (click)="acceptFriendRequest(request.user_id)"></a>
+                    <a  class="btn btn-danger  btn-xs glyphicon glyphicon-trash" href="#" title="Decline"></a>
+                </label>
+              </div>
+        </li>
+    </ul>
+</ng-template>

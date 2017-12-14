@@ -290,4 +290,15 @@ public class UserServiceImpl implements UserService{
 		
 	}
 	
+	@Transactional
+	public List<User> getFriendRequests(int userId) {
+		User user = dao.get(userId);
+		if(user == null) throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Null user requested");
+		List<User> friendRequests = user.getFriendRequests();
+		for(User friendRequest : friendRequests)
+			Hibernate.initialize(friendRequest);
+		return friendRequests;
+		
+	}
+	
 }

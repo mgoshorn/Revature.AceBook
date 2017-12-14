@@ -23,8 +23,12 @@ public interface UserService {
 
 	public List<User> getFriends(int userId);
 
+	public List<User> getFriendRequests(int userId);
+
+
 	public void updateProfilePhoto(ProfilePhotoUpload upload);
 
 	public byte[] getProfileImage(int userId) throws IOException;
+
 }
 	
