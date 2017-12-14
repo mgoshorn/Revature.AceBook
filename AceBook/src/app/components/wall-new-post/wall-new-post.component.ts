@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { WallPostService } from '../../services/wall-post.service';
 import { ActivatedRoute } from '@angular/router';
 import { WallPost } from '../../models/WallPost';
+import { StorageService } from '../../services/storage.service';
 
 @Component({
   selector: 'app-wall-new-post',
@@ -15,10 +16,13 @@ export class WallNewPostComponent implements OnInit {
   private sub: any;
   inputText: String;
 
-  constructor(private route: ActivatedRoute, private wallPostService: WallPostService) { }
+  constructor(private route: ActivatedRoute, private wallPostService: WallPostService, private storageService: StorageService) { }
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
       this.targetId = +params['id'];
+      if (isNaN(this.targetId)) {
+        this.targetId = this.storageService.getUser().user_id;
+      }
     });
   }
 

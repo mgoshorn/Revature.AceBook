@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -64,6 +65,13 @@ public class User {
 	@JsonIgnore
 	private List<User> friendRequests;
 
+	//User images
+	
+	@JoinColumn(name = "user_id")
+	@OneToOne(cascade = CascadeType.ALL)
+	private ProfileImages images;
+	
+	
 	public int getUser_id() {
 		return userId;
 	}
@@ -162,9 +170,21 @@ public class User {
 	public List<User> getFriends() {
 		return friends;
 	}
+
 	public List<User> getFriendRequests() {
 		return friendRequests;
 	}
+
+	
+	public ProfileImages getImages() {
+		return images;
+	}
+	
+	public void setImages(ProfileImages images) {
+		this.images = images;
+	}
+
+
 
 	@Override
 	public int hashCode() {

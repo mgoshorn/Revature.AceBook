@@ -1,11 +1,13 @@
 package com.acebook.controllers;
 
 
+import java.io.IOException;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -74,10 +76,32 @@ public class UserController {
 		return service.getFriends(userId);
 	}
 	
+
 	@GetMapping("friendrequests/{userId}")
 	@CrossOrigin(allowCredentials = "true", origins = "http://localhost:4200")
 	public List<User> getFriendsRequests(@PathVariable("userId") int userId) {
 		return service.getFriendRequests(userId);
+	}
+
+	@GetMapping(value="profile/{userId}", produces = MediaType.IMAGE_PNG_VALUE)
+	@CrossOrigin(allowCredentials = "true", origins = "http://localhost:4200")
+	public byte[] getProfilePhoto(@PathVariable("userId") int userId) throws IOException  {
+		try {
+			byte[] arr = service.getProfileImage(userId);
+			log.trace("Returning array!");
+			return arr;
+		} catch(IOException e) {
+			e.printStackTrace();
+			return null;
+		} catch(HttpClientErrorException e) {
+			byte[] arr = new byte[512*512];
+			UserController.class.getClassLoader().getResourceAsStream("default_image.jpg").read(arr);
+			return arr;
+//			return Files.readAllBytes(new File("src/main/resources/default_image.jpg").toPath());
+			
+		}
+		
+
 	}
 	
 	

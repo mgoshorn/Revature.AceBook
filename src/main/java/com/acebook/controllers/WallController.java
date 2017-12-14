@@ -16,6 +16,7 @@ import org.springframework.web.client.HttpStatusCodeException;
 
 import com.acebook.beans.Credentials;
 import com.acebook.beans.PostRequest;
+import com.acebook.beans.ProfilePhotoUpload;
 import com.acebook.entities.WallPost;
 import com.acebook.services.WallService;
 
@@ -43,10 +44,15 @@ public class WallController {
 		return ws.getWallPosts(userId, credentials);
 	}
 	
+	@PostMapping("profilePhoto/update") 
+	public void updateProfilePhoto(@RequestBody ProfilePhotoUpload upload){
+		log.trace("Requesting profile photo update: " + upload.getImage().length());
+		ws.updateProfile(upload);
+	}
+	
 	@ExceptionHandler(HttpStatusCodeException.class)
 	public ResponseEntity<String> handleException(HttpStatusCodeException e) {
 		return ResponseEntity.status(e.getStatusCode()).body(e.getMessage());
-		
 	}
 
 }

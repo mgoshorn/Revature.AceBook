@@ -61,12 +61,13 @@ public class WallPost implements Comparable<WallPost> {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((body == null) ? 0 : body.hashCode());
-		result = prime * result + ((owner == null) ? 0 : owner.hashCode());
 		result = prime * result + ((postTime == null) ? 0 : postTime.hashCode());
-		result = prime * result + ((poster == null) ? 0 : poster.hashCode());
+		result = prime * result + privacy;
 		result = prime * result + wallPostId;
 		return result;
 	}
+
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -82,20 +83,12 @@ public class WallPost implements Comparable<WallPost> {
 				return false;
 		} else if (!body.equals(other.body))
 			return false;
-		if (owner == null) {
-			if (other.owner != null)
-				return false;
-		} else if (!owner.equals(other.owner))
-			return false;
 		if (postTime == null) {
 			if (other.postTime != null)
 				return false;
 		} else if (!postTime.equals(other.postTime))
 			return false;
-		if (poster == null) {
-			if (other.poster != null)
-				return false;
-		} else if (!poster.equals(other.poster))
+		if (privacy != other.privacy)
 			return false;
 		if (wallPostId != other.wallPostId)
 			return false;
