@@ -11,7 +11,8 @@ import { FriendRequestService } from '../../services/friend-request.service';
 })
 export class FriendComponent implements OnInit {
 
-  constructor(private friendService: FriendService, private storageService: StorageService) {
+  constructor(private friendService: FriendService, private storageService: StorageService,
+  private friendRequestService: FriendRequestService) {
     this.setFriends();
   }
   friends: User[];

@@ -13,8 +13,8 @@ import { StorageService } from '../../services/storage.service';
 export class ProfileComponent implements OnInit {
 
   user: User = this.storageService.getUser();
-  // firstName = this.user.firstName;
-  // lastName = this.user.lastName;
+  firstName = this.user.firstName;
+  lastName = this.user.lastName;
 
   constructor(private storageService: StorageService) { }
 

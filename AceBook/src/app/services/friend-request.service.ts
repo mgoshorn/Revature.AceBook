@@ -13,8 +13,4 @@ export class FriendRequestService {
 
   constructor(private http: HttpClient, private storageService: StorageService) { }
 
- 
-  }
-
-
 }
