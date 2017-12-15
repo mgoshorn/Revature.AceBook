@@ -4,7 +4,7 @@
 </button>
 
 <app-friend-list [friends]="friends" *ngIf="showFriends"></app-friend-list>
-<app-friend-request [pendingRequests]="friendRequests" *ngIf="!showFriends"></app-friend-request>
+<app-friend-request [pendingRequests]="friendRequests" (acceptFriendEvent)="ReceivedAcceptedId($event)" *ngIf="!showFriends"></app-friend-request>
 
 
 <!-- <div *ngIf="showFriends;then friendList else requestList">Hello!</div>
