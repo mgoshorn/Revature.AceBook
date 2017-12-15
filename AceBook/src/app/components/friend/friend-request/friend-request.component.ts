@@ -28,4 +28,11 @@ export class FriendRequestComponent implements OnInit {
     });
   }
 
+  sendFriendRequest(userId) {
+    this.friendRequestService.sendFriendRequest(userId)
+    .subscribe( (response) => {
+      console.log(response);
+    });
+  }
+
 }

@@ -21,7 +21,8 @@ export const appRoutes: Routes = [
   },
   {
     path: 'feed',
-    component: FeedComponent
+    component: FeedComponent,
+    pathMatch: 'full'
   },
   {
     path: '**',
