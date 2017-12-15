@@ -1,8 +1,12 @@
-.friend-request img {
-       height:80px; 
-       width:80px;
-    }
+.list-group-item img {
+    height:80px; 
+    width:80px;
+ }
 
 .name {
-       color:#5bc0de;    
-    }
+    color:#5bc0de;    
+ }
+
+ li {
+    list-style-type: none;
+ }

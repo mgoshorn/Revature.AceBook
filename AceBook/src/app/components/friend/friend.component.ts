@@ -20,6 +20,10 @@ export class FriendComponent implements OnInit {
   friend: User;
   user: User;
   friendRequests: User[];
+
+  newFriendId: number;
+  newFriend: User;
+
   showFriends = true;
   buttonText = true;
 
@@ -50,10 +54,19 @@ export class FriendComponent implements OnInit {
     this.showFriends = !this.showFriends;
   }
 
-  acceptFriendRequest(userId) {
-    this.friendRequestService.acceptRequest(userId)
-    .subscribe( (response) => {
-      console.log(response);
-    });
+  ReceivedAcceptedId($event) {
+    this.newFriendId = $event;
+    console.log(this.newFriendId);
+    for (let i = 0; i < this.friendRequests.length; i++) {
+      if (this.newFriendId === this.friendRequests[i].user_id) {
+        this.newFriend = this.friendRequests[i];
+        this.friendRequests.slice(i, 1);
+        this.friends.push(this.newFriend);
+        console.log(this.friends);
+        this.getFriends();
+        this.getFriendRequests();
+      }
+    }
   }
+
 }
