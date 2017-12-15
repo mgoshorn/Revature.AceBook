@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
+import { FriendRequestService } from '../../../services/friend-request.service';
+import { EventEmitter } from '@angular/core';
 @Component({
   selector: 'app-friend-request',
   templateUrl: './friend-request.component.html',
@@ -6,15 +8,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FriendRequestComponent implements OnInit {
 
-  pending_requests: any[];
+  @Input() pendingRequests: any[];
+  @Output() acceptFriendEvent = new EventEmitter<number>();
+  friendId: number;
 
-  constructor() { }
+  constructor(private friendRequestService: FriendRequestService) { }
 
   ngOnInit() {
-    this.getCredentials();
+
   }
 
-  getCredentials() {
+  acceptFriendRequest(userId) {
+    this.friendRequestService.acceptRequest(userId)
+    .subscribe( (response) => {
+      console.log(response);
+      this.friendId = userId;
+      console.log(this.friendId);
+      this.acceptFriendEvent.emit(this.friendId);
+    });
+  }
+
+  sendFriendRequest(userId) {
+    this.friendRequestService.sendFriendRequest(userId)
+    .subscribe( (response) => {
+      console.log(response);
+    });
   }
 
 }
