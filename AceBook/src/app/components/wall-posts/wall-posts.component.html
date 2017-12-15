@@ -35,7 +35,7 @@
   </div>
 
   <div id="comment-area">
-      <div id="comment-input" contenteditable="true" contenteditable="true" propValueAccessor="innerHTML" [(ngModel)]="post.commentField"></div>
+      <div id="comment-input" contenteditable="true" ngDefaultControl contenteditable="true" propValueAccessor="innerHTML" [(ngModel)]="post.commentField"></div>
       <button id="comment-button" class="btn btn-sm btn-default" (click)="sendComment(post)">Submit</button>
   </div>
   
