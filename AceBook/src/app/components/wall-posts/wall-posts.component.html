@@ -6,7 +6,7 @@
         </a>
       </div>
       <div id="details">
-          <a href="../#/profile/{{post.poster.user_id}}">
+          <a routerLink="/profile/{{post.poster.user_id}}" (click)="getOwner(post.poster.user_id)">
               <div id="nameTag">{{post.poster.firstName}} {{post.poster.lastName}}</div>
           </a>
           <div id="postTime">{{post.postTime[3]}}:{{post.postTime[4]}}, {{post.postTime[0]}}-{{post.postTime[1]}}-{{post.postTime[2]}}</div>

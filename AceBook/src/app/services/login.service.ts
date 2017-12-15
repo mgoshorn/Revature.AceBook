@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 import { environment } from '../../environments/environment';
 import { Credentials } from '../models/credentials';
-import { User } from '../models/User';
+import { User } from '../models/user';
 import { StorageService } from './storage.service';
 
 

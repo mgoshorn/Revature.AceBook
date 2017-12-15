@@ -16,8 +16,7 @@
                 <input (change)="uploadProfileImage($event)" id="profile-image-uploader" name="profileImage" type="file" accept="image/*" value="">
             </div>
             <div  id="profile-details" class="fb-profile-text col-md-8">
-                <h1>{{firstName}} {{lastName}}</h1>
-                <p>Enjoys Snacking.</p>
+                <h1></h1>
                     <div id="container">
                         <textarea [(ngModel)]="conversationStart" required id="new-conversation-start" placeholder="Start a conversation"></textarea>
                         <input id="new-conversation-start-button" type="button" value="Start" class="btn btn-primary" (click)="convStart()">
@@ -31,7 +30,7 @@
             <app-friend></app-friend>
         </div>
         <div class="col-md-6" style="border: solid">
-            <app-profile-wall></app-profile-wall>
+            <app-profile-wall (updateProfile)="profileUpdate($event)"></app-profile-wall>
         </div>
     </div>
 </div> <!-- /container -->  

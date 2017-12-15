@@ -104,5 +104,17 @@ public class UserController {
 
 	}
 	
+	@GetMapping("profile/owner/{userId}")
+	@CrossOrigin(allowCredentials = "true", origins = "http://localhost:4200")
+	public User getByUserId(@PathVariable("userId") int userId) {
+		log.trace("Trying to get the owner by ID");
+		try {
+			return service.mustGetUserById(userId);
+		}
+		catch(RuntimeException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user';
+import { HttpClient } from '@angular/common/http';
 import { MessageService } from '../../services/message.service';
 import { ActivatedRoute } from '@angular/router';
 import { StorageService } from '../../services/storage.service';
@@ -13,6 +14,7 @@ import { environment } from '../../../environments/environment';
 })
 export class ProfileComponent implements OnInit {
   ownerId: number;
+  owner: User;
   private sub: any;
   private profileUploadLocation: string;
   user: User = this.storageService.getUser();
@@ -21,16 +23,29 @@ export class ProfileComponent implements OnInit {
   conversationStart: String;
   profileImageLoc: string;
 
-  constructor(private storageService: StorageService, private route: ActivatedRoute, private imageUpload: ProfileImageUploadService,
-    private messageService: MessageService) {
+  constructor(private http: HttpClient, private storageService: StorageService, private route: ActivatedRoute,
+    private imageUpload: ProfileImageUploadService, private messageService: MessageService) {
     this.sub = this.route.params.subscribe(params => {
       this.ownerId = +params['id'];
       this.profileImageLoc = environment.context + 'users/profile/' + this.ownerId;
     });
   }
 
+  profileUpdate() {
+    this.user = this.storageService.getOwner();
+  }
 
   ngOnInit() {
+    this.user = this.storageService.getOwner();
+    /*this.http.get<User>(environment.context + 'users/profile/owner/' + this.ownerId, {withCredentials: true})
+    .subscribe( (success) => {
+      this.user = Object.assign(new User, success);
+      this.storageService.setUser(this.user);
+      console.log('profile/' + success.user_id);
+    }, (error) => {
+      console.log('error');
+      alert('failed to load owner');
+    });*/
   }
 
   convStart() {
