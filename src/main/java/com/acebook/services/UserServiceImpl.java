@@ -301,4 +301,10 @@ public class UserServiceImpl implements UserService{
 		
 	}
 	
+	@Override
+	public Optional<User> getByUsername(String username) {
+		Optional<User> user = dao.getUserByUsername(username);
+		return user;
+	}
+	
 }

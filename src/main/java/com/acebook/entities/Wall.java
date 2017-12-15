@@ -2,7 +2,7 @@ package com.acebook.entities;
 
 import java.util.List;
 
-import javax.persistence.Entity;
+//import javax.persistence.Entity;
 import javax.persistence.Id;
 
 public class Wall {

@@ -1,0 +1,29 @@
+.message{
+    margin: 1vmin;
+    padding: 1vmin;
+    box-sizing: border-box;
+    position: relative;
+    background: #e7e7e7;
+    border-radius: 0.5vmin;
+    max-width: 50%;
+}
+#imgContainer {
+    float: left;
+    position: relative;
+    height: 8vmin;
+    width: 8vmin;
+    overflow: visible;
+    z-index: 100;
+    cursor: pointer;
+}
+
+#userImg {
+    max-width: 100%;
+    border-radius: 100%;
+    transition: all 250ms ease-in-out;
+}
+
+#postTime {
+    color: #555;
+    font-size: 0.8em;
+}
