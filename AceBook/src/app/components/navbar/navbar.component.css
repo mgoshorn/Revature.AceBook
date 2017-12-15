@@ -1,0 +1,21 @@
+nav {
+    width: 100%;
+    background: #462679;
+    color: #CCC;
+    display: flex;
+    justify-content: space-between;
+    padding: 1vmin;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10000;
+}
+
+a:hover, a:focus, a:active, a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #ccc;
+    margin: 0 4vmin;
+    font-size: 130%;
+}

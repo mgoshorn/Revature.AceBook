@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from '../app/components/login/login.component';
 import { ProfileComponent } from '../app/components/profile/profile.component';
-import { Profile } from 'selenium-webdriver/firefox';
+import { FriendComponent } from '../app/components/home/friend/friend.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { WallData } from './models/wall-data';
 import { FeedComponent } from './components/feed/feed.component';
@@ -21,7 +21,8 @@ export const appRoutes: Routes = [
   },
   {
     path: 'feed',
-    component: FeedComponent
+    component: FeedComponent,
+    pathMatch: 'full'
   },
   {
     path: '**',
