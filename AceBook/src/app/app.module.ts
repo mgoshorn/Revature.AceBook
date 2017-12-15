@@ -24,6 +24,7 @@ import { WallPostsComponent } from './components/wall-posts/wall-posts.component
 
 import { LoginService } from '../app/services/login.service';
 import { SignupService } from './services/signup.service';
+import { FriendService } from './services/friend.service';
 import { FriendRequestService } from './services/friend-request.service';
 
 
@@ -34,6 +35,7 @@ import { WallPostService } from './services/wall-post.service';
 import { FeedComponent } from './components/feed/feed.component';
 import { ProfileImageUploadService } from './services/profile-image-upload.service';
 import { ContenteditableDirective } from './directives/contenteditable-directive';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,11 @@ import { ContenteditableDirective } from './directives/contenteditable-directive
     WallPostsComponent,
     FriendComponent,
     FeedComponent,
+<<<<<<< HEAD
     ContenteditableDirective
+=======
+    NavbarComponent
+>>>>>>> 5355a694561669e738c3f337d22fc0d6eaddff67
   ],
   imports: [
     BrowserModule,
@@ -59,8 +65,8 @@ import { ContenteditableDirective } from './directives/contenteditable-directive
     ReactiveFormsModule,
     HttpClientModule
   ],
-
-  providers: [LoginService, SignupService, FriendRequestService, StorageService, WallPostService, ProfileImageUploadService ],
+  providers: [LoginService, SignupService, FriendRequestService, StorageService, WallPostService,
+    FriendService, ProfileImageUploadService ],
 
   bootstrap: [AppComponent]
 })

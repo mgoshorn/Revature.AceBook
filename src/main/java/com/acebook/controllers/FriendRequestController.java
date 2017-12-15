@@ -44,12 +44,14 @@ public class FriendRequestController {
 	}
 	
 	@PostMapping("friend/{userIdString}")
+	@CrossOrigin(allowCredentials = "true", origins = "http://localhost:4200")
 	public FriendRequestState getState(@PathVariable("userIdString") int userId,
 			@RequestBody Credentials credentials) {
 		return service.handleFriendRequestState(credentials, userId);
 	}
 	
 	@PostMapping("accept/{userIdString}")
+	@CrossOrigin(allowCredentials = "true", origins = "http://localhost:4200")
 	public boolean acceptRequest(@PathVariable("userIdString") int userId,
 			@RequestBody Credentials credentials) {
 		return service.handleRequestResponse(credentials, userId, true);
@@ -57,6 +59,7 @@ public class FriendRequestController {
 	
 	
 	@PostMapping("deny/{userIdString}")
+	@CrossOrigin(allowCredentials = "true", origins = "http://localhost:4200")
 	public boolean denyRequest(@PathVariable("userIdString") int userId,
 			@RequestBody Credentials credentials) {
 		return service.handleRequestResponse(credentials, userId, false);

@@ -76,6 +76,13 @@ public class UserController {
 		return service.getFriends(userId);
 	}
 	
+
+	@GetMapping("friendrequests/{userId}")
+	@CrossOrigin(allowCredentials = "true", origins = "http://localhost:4200")
+	public List<User> getFriendsRequests(@PathVariable("userId") int userId) {
+		return service.getFriendRequests(userId);
+	}
+
 	@GetMapping(value="profile/{userId}", produces = MediaType.IMAGE_PNG_VALUE)
 	@CrossOrigin(allowCredentials = "true", origins = "http://localhost:4200")
 	public byte[] getProfilePhoto(@PathVariable("userId") int userId) throws IOException  {
@@ -94,6 +101,7 @@ public class UserController {
 			
 		}
 		
+
 	}
 	
 	
