@@ -52,11 +52,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     WallPostsComponent,
     FriendComponent,
     FeedComponent,
-<<<<<<< HEAD
-    ContenteditableDirective
-=======
     NavbarComponent
->>>>>>> 5355a694561669e738c3f337d22fc0d6eaddff67
   ],
   imports: [
     BrowserModule,
