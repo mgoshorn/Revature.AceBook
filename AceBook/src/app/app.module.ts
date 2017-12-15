@@ -33,6 +33,7 @@ import { WallPostService } from './services/wall-post.service';
 
 import { FeedComponent } from './components/feed/feed.component';
 import { ProfileImageUploadService } from './services/profile-image-upload.service';
+import { ContenteditableDirective } from './directives/contenteditable-directive';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { ProfileImageUploadService } from './services/profile-image-upload.servi
     WallNewPostComponent,
     WallPostsComponent,
     FriendComponent,
-    FeedComponent
+    FeedComponent,
+    ContenteditableDirective
   ],
   imports: [
     BrowserModule,

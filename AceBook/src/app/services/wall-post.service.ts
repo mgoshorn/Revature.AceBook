@@ -19,15 +19,17 @@ export class WallPostService {
     console.log(json);
 
     return this.http.post<WallPost>(environment.context + 'wall/post/' + targetId, json, {withCredentials: true});
+  }
 
-    // this.http.post<WallPost>(environment.context + 'wall/post/' + targetId, json, {withCredentials: true})
-    // .subscribe( (success) => {
-    //   return success;
-    // }, (error) => {
-    //   console.log('error adding wall post');
-    //   alert('failed to add wall post');
-    //   return null;
-    // });
+  postComment(text, wallPostId) {
+    console.log(text);
+    console.log(wallPostId);
+
+    const json = {
+      'credentials': this.storageService.getCredentials(),
+      'postbody': text
+    };
+    return this.http.post<Comment>(environment.context + 'wall/comment/' + wallPostId, json, {withCredentials: true});
   }
 
 }

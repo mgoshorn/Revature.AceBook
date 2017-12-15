@@ -11,9 +11,32 @@
           </a>
           <div id="postTime">{{post.postTime[3]}}:{{post.postTime[4]}}, {{post.postTime[0]}}-{{post.postTime[1]}}-{{post.postTime[2]}}</div>
       </div>
-          
   </header>
   
   <hr>
   <div id="body">{{post.body}}</div>
+  <hr id="comment-break">
+
+  <div id="user-comment" *ngFor="let comment of post.comments">
+    <div id="imgContainer">
+        <a href="../#/profile/{{comment.poster.user_id}}">
+            <img id="userImg" src="{{profileImageLoc + comment.poster.user_id}}">
+        </a>
+    </div>
+    <div id="details">
+        <a href="../#/profile/{{comment.poster.user_id}}">
+            <div id="nameTag">{{comment.poster.firstName}} {{comment.poster.lastName}}</div>
+        </a>
+        <div id="postTime">{{comment.postTime[3]}}:{{comment.postTime[4]}}, {{comment.postTime[0]}}-{{comment.postTime[1]}}-{{comment.postTime[2]}}</div>
+    </div>
+    <div id="comment-body">{{comment.body}}</div>
+    <hr>
+
+  </div>
+
+  <div id="comment-area">
+      <div id="comment-input" contenteditable="true" contenteditable="true" propValueAccessor="innerHTML" [(ngModel)]="post.commentField"></div>
+      <button id="comment-button" class="btn btn-sm btn-default" (click)="sendComment(post)">Submit</button>
+  </div>
+  
 </div>

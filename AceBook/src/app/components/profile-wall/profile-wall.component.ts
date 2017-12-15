@@ -30,6 +30,7 @@ export class ProfileWallComponent implements OnInit {
       .post<Array<WallPost>>(environment.context + 'wall/read/' + this.id, this.storageService.getCredentials(), {'withCredentials': true})
       .subscribe(data => {
         this.wallData.data = data;
+        console.log(data);
       });
    });
   }
