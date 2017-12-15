@@ -1,23 +1,23 @@
 <div class="wallPost" *ngFor="let post of posts">
-  <header>
-      <div id="imgContainer">
+<header>
+    <div id="imgContainer">
         <a href="../#/profile/{{post.poster.user_id}}">
-          <img id="userImg"  src="{{profileImageLoc + post.poster.user_id}}">
+        <img id="userImg"  src="{{profileImageLoc + post.poster.user_id}}">
         </a>
-      </div>
-      <div id="details">
-          <a routerLink="/profile/{{post.poster.user_id}}" (click)="getOwner(post.poster.user_id)">
-              <div id="nameTag">{{post.poster.firstName}} {{post.poster.lastName}}</div>
-          </a>
-          <div id="postTime">{{post.postTime[3]}}:{{post.postTime[4]}}, {{post.postTime[0]}}-{{post.postTime[1]}}-{{post.postTime[2]}}</div>
-      </div>
-  </header>
-  
-  <hr>
-  <div id="body">{{post.body}}</div>
-  <hr id="comment-break">
+    </div>
+    <div id="details">
+        <a routerLink="/profile/{{post.poster.user_id}}" (click)="getOwner(post.poster.user_id)">
+            <div id="nameTag">{{post.poster.firstName}} {{post.poster.lastName}}</div>
+        </a>
+        <div id="postTime">{{post.postTime[3]}}:{{post.postTime[4]}}, {{post.postTime[0]}}-{{post.postTime[1]}}-{{post.postTime[2]}}</div>
+    </div>
+</header>
 
-  <div id="user-comment" *ngFor="let comment of post.comments">
+<hr>
+<div id="body">{{post.body}}</div>
+<hr id="comment-break">
+
+<div id="user-comment" *ngFor="let comment of post.comments">
     <div id="imgContainer">
         <a href="../#/profile/{{comment.poster.user_id}}">
             <img id="userImg" src="{{profileImageLoc + comment.poster.user_id}}">
@@ -32,11 +32,9 @@
     <div id="comment-body">{{comment.body}}</div>
     <hr>
 
-  </div>
+</div>
 
-  <div id="comment-area">
-      <div id="comment-input" contenteditable="true" ngDefaultControl contenteditable="true" propValueAccessor="innerHTML" [(ngModel)]="post.commentField"></div>
-      <button id="comment-button" class="btn btn-sm btn-default" (click)="sendComment(post)">Submit</button>
-  </div>
-  
+<div id="comment-area">
+    <div id="comment-input" contenteditable="true" ngDefaultControl propValueAccessor="innerText" [(ngModel)]="post.commentField"></div>
+    <button id="comment-button" class="btn btn-sm btn-default" (click)="sendComment(post)">Submit</button>
 </div>

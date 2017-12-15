@@ -40,7 +40,7 @@ export class ProfileImageUploadService {
           .subscribe(
             succ => {
               this.resolutionSubject.next(true);
-              this.router.navigateByUrl('profile');
+              this.router.navigateByUrl('login');
             },
             err => this.resolutionSubject.next(false)
           );

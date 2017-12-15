@@ -55,7 +55,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     FeedComponent,
     FriendListComponent,
     FriendRequestComponent,
-    NavbarComponent
+    NavbarComponent,
+    ContenteditableDirective
   ],
   imports: [
     BrowserModule,

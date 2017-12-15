@@ -51,7 +51,7 @@ export class ProfileComponent implements OnInit {
   convStart() {
     this.messageService.startConversation(this.conversationStart).subscribe(
         (data) => {
-          //this.updateMessages.next(data);
+          // this.updateMessages.next(data);
           alert('Conversation Started');
         }, (error) => {
           console.log('error Starting Conversation');
