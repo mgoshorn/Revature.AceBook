@@ -17,9 +17,25 @@
     cursor: pointer;
 }
 
+#user-comment #imgContainer {
+    height: 6vmin;
+    width: 6vmin;
+    padding-top: 1vmin;
+}
+
+#user-comment {
+    padding-left: 2vmin;
+}
 #imgContainer:hover {
     z-index: 101;
 }
+
+#comment-body {
+    padding-top: 1vmin;
+    padding-bottom: 1vmin;
+    padding-left: 10vmin;
+}
+
 
 #userImg {
     max-width: 100%;
@@ -61,3 +77,41 @@ hr {
 #body {
     margin-left: 10vmin;
 }
+
+#comment-area {
+    display: flex;
+    flex-direction: row;
+}
+
+#comment-break {
+    border-color: #888;
+    margin: 0.25vmin;
+}
+
+#comment-input {
+    margin: 0.25vmin;
+    flex-grow: 1;
+    border-radius: 1vmin;
+    border: 2px white ridge;
+    background: white;
+    padding: 5px;
+    max-width: 100%;
+    overflow: hidden;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+#comment-input:focus, #comment-input:active {
+    border: 2px white ridge;
+}
+
+#comment-input:empty:after {
+    color: grey;
+    content: "Add a comment...";
+}
+
+#comment-button {
+    flex-grow: 0;
+    margin: 0.25vmin;
+    align-self: flex-end;
+}
+

@@ -1,12 +1,16 @@
 package com.acebook.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -30,6 +34,9 @@ public class WallPost implements Comparable<WallPost> {
 	private LocalDateTime postTime;
 	private int privacy = 1;
 
+	@OneToMany(mappedBy="parent", cascade= CascadeType.ALL, fetch=FetchType.EAGER)
+	private List<Comment> comments;
+	
 	public WallPost(User wallOwner, User poster, String postbody) {
 		this.owner = wallOwner;
 		this.poster = poster;
@@ -143,6 +150,27 @@ public class WallPost implements Comparable<WallPost> {
 		this.privacy = privacy;
 	}
 	
+	
+
+	public WallPost(int wallPostId, User owner, User poster, String body, LocalDateTime postTime, int privacy,
+			List<Comment> comments) {
+		super();
+		this.wallPostId = wallPostId;
+		this.owner = owner;
+		this.poster = poster;
+		this.body = body;
+		this.postTime = postTime;
+		this.privacy = privacy;
+		this.comments = comments;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
 
 	@Override
 	public int compareTo(WallPost wp) {

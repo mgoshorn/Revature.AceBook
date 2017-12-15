@@ -7,6 +7,7 @@ export class StorageService {
 
   credentials: Credentials;
   user: User;
+  owner: User;
 
   constructor() { }
 
@@ -26,6 +27,15 @@ export class StorageService {
 
   getUser() {
     return this.user;
+  }
+
+  setOwner(owner: User) {
+    this.owner = owner;
+    console.log(this.owner);
+  }
+
+  getOwner() {
+    return this.owner;
   }
 
 }

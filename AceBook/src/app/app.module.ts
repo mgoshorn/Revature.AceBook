@@ -16,6 +16,9 @@ import { SignupComponent } from './components/signup/signup.component';
 import { ProfileWallComponent } from './components/profile-wall/profile-wall.component';
 import { WallNewPostComponent } from './components/wall-new-post/wall-new-post.component';
 import { WallPostsComponent } from './components/wall-posts/wall-posts.component';
+import { ConversationComponent } from './components/conversation/conversation.component';
+import { MessagesComponent } from './components/messages/messages.component';
+import { NewMessageComponent } from './components/new-message/new-message.component';
 
 import { LoginService } from '../app/services/login.service';
 import { SignupService } from './services/signup.service';
@@ -26,9 +29,12 @@ import { FriendRequestService } from './services/friend-request.service';
 import { appRoutes } from './app.routes';
 import { StorageService } from './services/storage.service';
 import { WallPostService } from './services/wall-post.service';
+import { MessageService } from './services/message.service';
+
 
 import { FeedComponent } from './components/feed/feed.component';
 import { ProfileImageUploadService } from './services/profile-image-upload.service';
+import { ContenteditableDirective } from './directives/contenteditable-directive';
 import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
@@ -41,6 +47,11 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     WallNewPostComponent,
     WallPostsComponent,
     FriendComponent,
+    FriendListComponent,
+    FriendRequestComponent,
+    ConversationComponent,
+    MessagesComponent,
+    NewMessageComponent,
     FeedComponent,
     FriendListComponent,
     FriendRequestComponent,
@@ -54,7 +65,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     HttpClientModule
   ],
   providers: [LoginService, SignupService, FriendRequestService, StorageService, WallPostService,
-    FriendService, ProfileImageUploadService ],
+    FriendService, ProfileImageUploadService, MessageService ],
 
   bootstrap: [AppComponent]
 })

@@ -36,7 +36,9 @@ public class FriendRequestController {
 		int userId = 0;		
 		
 		try {
+			log.trace("The user id is: " + userIdString);
 			userId = Integer.parseInt(userIdString);
+			
 			service.addFriendRequest(credentials, userId);
 		} catch(NumberFormatException e) {
 			throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "URL format exception");	

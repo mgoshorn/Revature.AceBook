@@ -1,0 +1,17 @@
+<div class="message" *ngFor="let message of messages">
+    <div id="imgContainer">
+        <a href="../#/profile/{{message.sender.user_id}}">
+          <img id="userImg"  src="{{profileImageLoc + message.sender.user_id}}">
+        </a>
+      </div>
+    
+    <div id="details">
+        <a>
+            <div id="nameTag">{{message.sender.firstName}}</div>
+        </a>
+        <div id="postTime">{{message.postTime[3]}}:{{message.postTime[4]}}, {{message.postTime[0]}}-{{message.postTime[1]}}-{{message.postTime[2]}}</div>
+    </div>
+    <hr>
+    <div id="content">{{message.content}}</div>
+    
+</div>

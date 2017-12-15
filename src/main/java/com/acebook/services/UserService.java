@@ -3,6 +3,7 @@ package com.acebook.services;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import com.acebook.beans.Credentials;
 import com.acebook.beans.ProfilePhotoUpload;
@@ -23,8 +24,9 @@ public interface UserService {
 
 	public List<User> getFriends(int userId);
 
-	public List<User> getFriendRequests(int userId);
+	public Optional<User> getByUsername(String username);
 
+	public List<User> getFriendRequests(int userId);
 
 	public void updateProfilePhoto(ProfilePhotoUpload upload);
 

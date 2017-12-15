@@ -32,8 +32,7 @@ export class FriendComponent implements OnInit {
   }
 
   setFriends() {
-    this.friendService.getFriends()
-    .subscribe( (response) => {
+    this.friendService.getFriends().subscribe( (response) => {
       this.friends = Object.assign(new Array<User>(), response);
     });
   }
