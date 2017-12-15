@@ -1,5 +1,6 @@
 package com.acebook.services;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -14,6 +15,8 @@ import com.acebook.beans.Credentials;
 import com.acebook.beans.PostRequest;
 import com.acebook.beans.ProfilePhotoUpload;
 import com.acebook.dao.UserDao;
+import com.acebook.dao.WallPostDao;
+import com.acebook.entities.Comment;
 import com.acebook.entities.User;
 import com.acebook.entities.WallPost;
 
@@ -25,6 +28,9 @@ public class WallService {
 	
 	@Autowired
 	UserDao userDao;
+	
+	@Autowired
+	WallPostDao wpd;
 	
 	private Logger log = Logger.getRootLogger();
 	
@@ -74,6 +80,24 @@ public class WallService {
 		us.updateProfilePhoto(upload);
 		
 		log.trace("User profile image updated");
+		
+	}
+
+	@Transactional
+	public Comment addNewComment(int wallPostId, PostRequest commentRequest) {
+		User user = us.mustAuthenticate(commentRequest.getCredentials());
+		WallPost wp = wpd.get(wallPostId);
+		Comment comment = new Comment();
+		comment.setBody(commentRequest.getPostbody());
+		comment.setParent(wp);
+		comment.setCommentId(0);
+		comment.setPoster(user);
+		comment.setPostTime(LocalDateTime.now());
+		log.trace(wp);
+		log.trace(comment);
+		wp.getComments().add(comment);
+		wpd.save(wp);
+		return comment;
 		
 	}
 	
