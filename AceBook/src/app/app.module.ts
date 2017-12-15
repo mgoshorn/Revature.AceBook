@@ -8,15 +8,10 @@ import { HttpClientModule} from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
-import { HomeComponent } from '../app/components/home/home.component';
-import { UserComponent } from '../app/components/home/user/user.component';
 import { ProfileComponent } from '../app/components/profile/profile.component';
 import { FriendComponent } from '../app/components/friend/friend.component';
 import { FriendRequestComponent } from './components/friend/friend-request/friend-request.component';
 import { FriendListComponent } from './components/friend/friend-list/friend-list.component';
-
-import { PostComponent } from './components/post/post.component';
-import { PostListComponent } from './components/post/post-list/post-list.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { ProfileWallComponent } from './components/profile-wall/profile-wall.component';
 import { WallNewPostComponent } from './components/wall-new-post/wall-new-post.component';
@@ -41,17 +36,15 @@ import { NavbarComponent } from './components/navbar/navbar.component';
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent,
     ProfileComponent,
-    UserComponent,
-    PostComponent,
-    PostListComponent,
     SignupComponent,
     ProfileWallComponent,
     WallNewPostComponent,
     WallPostsComponent,
     FriendComponent,
     FeedComponent,
+    FriendListComponent,
+    FriendRequestComponent,
     NavbarComponent
   ],
   imports: [

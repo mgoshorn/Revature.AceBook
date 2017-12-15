@@ -30,6 +30,7 @@ public class FriendRequestController {
 	
 	
 	@PostMapping("request/{userIdString}")
+	@CrossOrigin(allowCredentials = "true", origins = "http://localhost:4200")
 	public boolean request(@PathVariable("userIdString") String userIdString, 
 						@RequestBody Credentials credentials) {
 		int userId = 0;		

@@ -26,4 +26,8 @@ export class FriendRequestService {
   acceptRequest(userId) {
     return this.http.post(environment.context + 'friendrequest/accept/' + userId, this.credentials, {withCredentials: true});
   }
+
+  sendFriendRequest(userId) {
+    return this.http.post(environment.context + 'friendrequest/request/' + userId, this.credentials, {withCredentials: true});
+  }
 }
